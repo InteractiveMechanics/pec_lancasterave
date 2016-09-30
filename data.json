@@ -1,0 +1,79 @@
+{ "type": "FeatureCollection",
+
+    "features": [
+      { 
+        "type": "Feature",
+        "geometry": {
+          "type": "Point", 
+          "coordinates": [-75.202163, 39.963028]
+          },
+          "properties": {
+            "title": "Dr.Martin Luther King Mural & State Marker",
+            "description": "An official State Historical Marker, mural and MLK sculpture commemorating Dr. Martin Luther King's 1965 \"Freedom Now\" Rally. On August 3, 1965, Dr. King addressed a crowd of 10,000 at the intersection of 40th Street, Lancaster Avenue and Haverford Avenue. The historic event was part of Dr. King's \"Freedom Now\" tour to Philadelphia, Chicago, Cleveland and Boston in gratitude for support given to his Southern Christian Leadership Conference. King brought his message into northern black neighborhoods, supporting local civil rights efforts and raising funds.",
+            "sourceTitle": "Philadelphia Inquirer",
+            "sourceUrl": "http://articles.philly.com/2015-07-31/news/65078363_1_north-philadelphia-king-girard-college",
+            "img": "placeholder",
+            "caption": "The crowd during Dr. Martin Luther King's 1965 \"Freedom Now\" Rally at 40th &amp; Lancaster",
+            "attr": "People's Emergency Center",
+            "attrUrl": "http://www.pec-cares.org",
+            "presentAddress": "4000 Lancaster Avenue",
+            "resourceTitle": "Civil Rights in a Northern City: Philadelphia",
+            "resourceUrl": "http://northerncity.library.temple.edu/content/reverend-dr-martin-luther-king-6",
+            "date": "8/3/1965",
+            "era": "1960-1979",
+            "category": "civil rights"
+          }
+        },
+
+        { 
+        "type": "Feature",
+        "geometry": {
+          "type": "Point", 
+          "coordinates": [-75.221372, 39.956667]
+          },
+          "properties": {
+            "title": "Paul Robeson House",
+            "description": "The Paul Robeson House in the Walnut Hill community of West Philadelphia, where he lived from 1966 to 1976 with his sister Marian Forsythe. Robeson was an American bass singer and actor who became involved with the Civil Rights Movement.",
+            "sourceTitle": "The Paul Robeson House",
+            "sourceUrl": "http://www.paulrobesonhouse.org",
+            "img": "placeholder",
+            "caption": "Paul Robeson",
+            "attr": "United States Library of Congress",
+            "attrUrl": "https://commons.wikimedia.org/wiki/File:Washington,_D.C._Paul_Robeson,_baritone_8b14814v.jpg",
+            "presentAddress": "4951 Walnut Street",
+            "resourceTitle": "The Paul Robeson House",
+            "resourceUrl": "http://paulrobesonhouse.org/",
+            "date": "1966-1976",
+            "era": "1960-1979",
+            "category": "civil rights"
+          }
+        },
+
+        { 
+        "type": "Feature",
+        "geometry": {
+          "type": "Point", 
+          "coordinates": [-75.197708, 39.961684]
+          },
+          "properties": {
+            "title": "The Ellen Powell Tiberino Memorial Museum",
+            "description": "The Tiberino family has been creating art in their Powelton Village neighborhood for over half a century. Joe Tiberino and wife, Ellen Powell Tiberino, firmly established themselves in Philadelphia’s art community and beyond, and the Tiberino children followed their lead. Daughter Ellen Tiberino works in ceramics and stained glass, Raphael describes his work as figurative impressionistic, and Gabriel has created several works for the Mural Arts Program. The Ellen Powell Tiberino Memorial Museum was established in October 1999 to celebrate the artist’s life and career. The museum consists of five houses and a common courtyard, filled with artwork by the Tiberino family and the works of over 30 other artists.",
+            "sourceTitle": "WHYY",
+            "sourceUrl": "http://whyy.org/cms/fridayarts/tiberino-the-west-philly-wyeths/",
+            "img": "placeholder",
+            "caption": "Joseph Tiberino and his wife, Ellen Powell Tiberino, with their children.",
+            "attr": "Philadelphia Tribune",
+            "attrUrl": "http://www.phillytrib.com/lifestyle/west-philly-artist-joseph-tiberino-remembered/article_e19fbf63-8211-5207-8b28-af95a1b6f08b.html",
+            "presentAddress": "3819 Hamilton Street",
+            "resourceTitle": "The Ellen Powell Tiberino Memorial Museum",
+            "resourceUrl": "http://www.tiberinomuseum.org/",
+            "date": "1966-1976",
+            "era": "1960-1979",
+            "category": "arts"
+          }
+        }
+
+
+     ]
+}
+
