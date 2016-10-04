@@ -18,12 +18,45 @@
 </head>
 
 <body>
-  <div class="map-container">
-    <div id="map"></div>
-  </div>
+    <div class="map-container">
+        <div id="map"></div>
+        
+        <div id="popup" class="fade hidden"></div>
+        
+
+        <div id="popup-template">
+              <button class="close"><img src="imgs/icon-close.svg" alt="close"></button>
+              <div class="popup-innner">
+              
+                  <span id="icon"></span><h4 id="address"></h4>
+                  <h1 id="title"></h1>
+                  
+                  <div class="img-container">
+                      <img src="" id="img">
+                      <p id="caption"></p>
+                  </div>
+                  
+                  <hr>
+
+                  <div class="discription-container">
+                      <p id="description"></p>
+                      <p>Information taken from <a href="" id="attrUrl"><span id="attr"></span></a>. 
+
+                  </div>
+
+              </div>
+
+        </div>
+    </div>
+
+  
+
+  
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.loadtemplate/1.4.4/jquery.loadTemplate.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.0.0/dist/leaflet.js"></script>
   <script src="main.js"></script>
+
 </body>
 </html>

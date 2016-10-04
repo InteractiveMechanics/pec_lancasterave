@@ -7,6 +7,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/interactivemech/cith8vx1k000l2imon
 
 L.control.zoom({position:'bottomright'}).addTo(map);
 
+
 var dataSuccess = function(jsonData) {
     console.log(jsonData);
     var layerOptions = {
@@ -17,7 +18,7 @@ var dataSuccess = function(jsonData) {
         	var artsIcon = L.icon({
 		    iconUrl: 'imgs/markers/mapmarker-arts@2x.png',
 
-		    iconSize:     [60, 60], // size of the icon
+		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
@@ -26,7 +27,7 @@ var dataSuccess = function(jsonData) {
 			var civilrightsIcon = L.icon({
 		    iconUrl: 'imgs/markers/mapmarker-civilrights@2x.png',
 
-		    iconSize:     [60, 60], // size of the icon
+		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
@@ -35,7 +36,7 @@ var dataSuccess = function(jsonData) {
 			var developmentIcon = L.icon({
 		    iconUrl: 'imgs/markers/mapmarker-development@2x.png',
 
-		    iconSize:     [60, 60], // size of the icon
+		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
@@ -44,7 +45,7 @@ var dataSuccess = function(jsonData) {
 			var infrastructureIcon = L.icon({
 		    iconUrl: 'imgs/markers/mapmarker-infrastructure@2x.png',
 
-		    iconSize:     [60, 60], // size of the icon
+		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
@@ -67,22 +68,60 @@ var dataSuccess = function(jsonData) {
 			},
 
 			markerOptions = {
-				icon: getIcon(category)
+				icon: getIcon(category),
+				riseOnHover: true
 			}
-
-			// var popupOptions = {
-			// 	maxWidth: 220,
-			// };
-
 
 			return L.marker(latlng, markerOptions);
 
-		}
+		},
+
+		onEachFeature: function (featureData, layer) {
+        //layer.bindPopup(feature.properties.GPSUserName);
+        	var clearPopup = function() {
+        		$('#popup').html('');
+        	}
+
+        	layer.on('click', function (e) {
+            	//clearPopup();
+            	var $popup = $('#popup');
+            	if ($popup.hasClass('hidden')) {
+            		$popup.removeClass('hidden').addClass('visible');
+            		$('#popup-template').appendTo($popup);
+            		$('#title').html(featureData.properties.title);
+            		$('#address').html(featureData.properties.presentAddress);
+            		$('#caption').html(featureData.properties.caption);
+            		$('#description').html(featureData.properties.description);
+            		$('#attrUrl').attr('href', 'featuredata.properties.attrUrl');
+            		$('#attr').html(featureData.properties.attr);
+
+
+            		alert(featureData.properties.category);
+           		}
+
+        	});
+
+	            console.log(featureData.properties.category);
+
+	        $( ".close" ).click(function() {
+			  $('#popup').addClass('hidden').removeClass('visible');
+			});
+
+			 
+ 
+    	}
+
 	};
+
 
 	var inventoryLayer = L.geoJson(jsonData, layerOptions);
 	map.addLayer(inventoryLayer);
 
-}; 
+};
 
 $.getJSON('data.json', dataSuccess);
+
+
+
+
+
