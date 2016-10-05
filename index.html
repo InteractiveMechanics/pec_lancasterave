@@ -26,22 +26,25 @@
 
         <div id="popup-template">
               <button class="close"><img src="imgs/icon-close.svg" alt="close"></button>
-              <div class="popup-innner">
-              
-                  <span id="icon"></span><h4 id="address"></h4>
-                  <h1 id="title"></h1>
-                  
-                  <div class="img-container">
-                      <img src="" id="img">
-                      <p id="caption"></p>
+              <div class="popup-inner">
+                  <div id="title-container">
+                    <span id="icon"></span><h4 id="address"></h4>
+                    <h1 id="title"></h1>
                   </div>
-                  
-                  <hr>
+                
+                  <div class="description-container">
+                    <div class="img-wrapper">
+                      <img src="" id="img">
+                    </div>
+                    
+                    <p class="caption-wrapper"><span id="caption"></span>. Image from <a href="" id="attrUrl"><span id="attr"></span></a>.</p>
+                    
+                    <hr>
 
-                  <div class="discription-container">
+                    <div class="description-wrapper">
                       <p id="description"></p>
-                      <p>Information taken from <a href="" id="attrUrl"><span id="attr"></span></a>. 
-
+                      <p>Information taken from <a href="" id="sourceUrl"><span id="sourceTitle"></span></a>. For more details visit <a href="" id="resourceUrl"><span id="resourceTitle"></span></a>. 
+                    </p>
                   </div>
 
               </div>

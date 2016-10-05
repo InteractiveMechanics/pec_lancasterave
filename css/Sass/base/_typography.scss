@@ -4,6 +4,10 @@ p {
 	font-family: $alegreya;
 	a {
 		color: $green;
+		transition: $transition;
+		&:hover, &:focus, &:active {
+			color: lighten($green, 10%);
+		}
 	}
 }
 

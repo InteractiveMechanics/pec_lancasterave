@@ -89,14 +89,17 @@ var dataSuccess = function(jsonData) {
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
             		$('#title').html(featureData.properties.title);
+            		$('#img').attr('src', featureData.properties.img);
             		$('#address').html(featureData.properties.presentAddress);
             		$('#caption').html(featureData.properties.caption);
-            		$('#description').html(featureData.properties.description);
-            		$('#attrUrl').attr('href', 'featuredata.properties.attrUrl');
             		$('#attr').html(featureData.properties.attr);
+            		$('#attrUrl').attr('href', 'featureData.properties.attrUrl');
+            		$('#description').html(featureData.properties.description);
+            		$('#sourceUrl').attr('href', 'featuredata.properties.sourceUrl');
+            		$('#sourceTitle').html(featureData.properties.sourceTitle);
+            		$('#resourceTitle').html(featureData.properties.resourceTitle);
+            		$('#resourceUrl').attr('href', 'featureData.properties.resourceUrl');
 
-
-            		alert(featureData.properties.category);
            		}
 
         	});

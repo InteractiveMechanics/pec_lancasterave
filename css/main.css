@@ -16,7 +16,10 @@ body {
 p {
   font-family: "Alegreya", Garamond, serif; }
   p a {
-    color: #8cc63e; }
+    color: #8cc63e;
+    transition: all 0.25s ease-in-out; }
+    p a:hover, p a:focus, p a:active {
+      color: #a3d265; }
 
 h1, h2 {
   font-family: "Alegreya", Garamond, serif;
@@ -45,40 +48,64 @@ hr {
   width: 100%; }
 
 #popup {
-  width: 30vw;
-  height: 75vh;
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 9999;
   background-color: #ffffff;
   padding: 10px;
-  transition: all 0.25 ease-in-out; }
+  transition: all 0.25s ease-in-out; }
 
 #popup-template {
-  position: relative; }
+  position: relative;
+  height: 75vh;
+  width: 30vw;
+  padding: 15px; }
 
 #address {
   color: #d91b5b;
   letter-spacing: 0.4px;
-  margin-bottom: 5px; }
+  margin-bottom: 0px; }
+
+.popup-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%; }
+
+#title-container {
+  flex: 0 0 auto; }
 
 #title {
-  width: 80%; }
+  width: 85%;
+  margin-top: 0px; }
 
-#caption {
-  font-style: italic; }
+.caption-wrapper {
+  font-style: italic;
+  margin-top: 5px; }
 
-#description-container {
-  overflow-y: scroll; }
+.caption-wrapper, .description-wrapper {
+  width: 95%; }
+
+#img {
+  width: 100%;
+  height: auto; }
+
+.img-wrapper {
+  height: 23vh;
+  overflow: hidden; }
+
+.description-container {
+  position: relative;
+  flex: 1 1 auto;
+  overflow-y: auto; }
 
 .close {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  right: -17px;
-  top: -39px;
+  right: -20px;
+  top: -21px;
   height: 25px;
   width: 25px;
   background-color: #ffffff;
