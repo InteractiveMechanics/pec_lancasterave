@@ -85,6 +85,7 @@ var dataSuccess = function(jsonData) {
         	layer.on('click', function (e) {
             	//clearPopup();
             	var $popup = $('#popup');
+            	var $category = featureData.properties.category;
             	if ($popup.hasClass('hidden')) {
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
@@ -99,6 +100,19 @@ var dataSuccess = function(jsonData) {
             		$('#sourceTitle').html(featureData.properties.sourceTitle);
             		$('#resourceTitle').html(featureData.properties.resourceTitle);
             		$('#resourceUrl').attr('href', 'featureData.properties.resourceUrl');
+            		if ($category == 'civil rights') {
+            			$('#icon').attr('src', 'imgs/icons/icon-civilrights.svg')
+            			$('#address').css({'color': '#594a41'});
+            		} else if ($category == 'arts') {
+            			$('#icon').attr('src', 'imgs/icons/icon-arts.svg');
+            			$('#address').css({'color': '#1b75bb'});
+            		} else if ($category == 'development') {
+            			$('#icon').attr('src', 'imgs/icons/icon-development.svg');
+            			$('#address').css({'color': '#d91b5b'});
+            		} else if ($category == 'infrastructure') {
+            			$('#icon').attr('src', 'imgs/icons/icon-infrastructure.svg');
+            			$('#address').css({'color': '#fbaf3f'})
+            		}
 
            		}
 

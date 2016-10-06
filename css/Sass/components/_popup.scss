@@ -8,6 +8,9 @@
 	background-color: #ffffff;
 	padding: 10px;
 	transition: $transition;
+	-webkit-box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
+	-moz-box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
+	box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
 }
 
 #popup-template {
@@ -18,9 +21,9 @@
 }
 
 #address {
-	color: $pink;
 	letter-spacing: 0.4px;
 	margin-bottom: 0px;
+	display: inline;
 }
 
 .popup-inner {
@@ -36,6 +39,11 @@
 #title {
 	width: 85%;
 	margin-top: 0px;
+}
+
+#icon {
+	height: 25px;
+	margin-right: 7px;
 }
 
 .caption-wrapper {

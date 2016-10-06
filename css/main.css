@@ -14,7 +14,8 @@ body {
   transition: opacity 0.5s ease-in-out; }
 
 p {
-  font-family: "Alegreya", Garamond, serif; }
+  font-family: "Alegreya", Garamond, serif;
+  font-size: 0.85em; }
   p a {
     color: #8cc63e;
     transition: all 0.25s ease-in-out; }
@@ -54,7 +55,10 @@ hr {
   z-index: 9999;
   background-color: #ffffff;
   padding: 10px;
-  transition: all 0.25s ease-in-out; }
+  transition: all 0.25s ease-in-out;
+  -webkit-box-shadow: -2px 5px 11px 0px rgba(110, 110, 110, 0.62);
+  -moz-box-shadow: -2px 5px 11px 0px rgba(110, 110, 110, 0.62);
+  box-shadow: -2px 5px 11px 0px rgba(110, 110, 110, 0.62); }
 
 #popup-template {
   position: relative;
@@ -63,9 +67,9 @@ hr {
   padding: 15px; }
 
 #address {
-  color: #d91b5b;
   letter-spacing: 0.4px;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  display: inline; }
 
 .popup-inner {
   display: flex;
@@ -78,6 +82,10 @@ hr {
 #title {
   width: 85%;
   margin-top: 0px; }
+
+#icon {
+  height: 25px;
+  margin-right: 7px; }
 
 .caption-wrapper {
   font-style: italic;
