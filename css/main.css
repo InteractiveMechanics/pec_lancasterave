@@ -125,4 +125,34 @@ hr {
   .close img {
     width: 10px; }
 
+.leaflet-right .leaflet-control {
+  margin-right: 20px; }
+
+.leaflet-control {
+  border-radius: 0px; }
+
+.leaflet-bar {
+  box-shadow: none; }
+  .leaflet-bar a {
+    color: #7b7b7b;
+    border: none;
+    transition: all 0.25s ease-in-out; }
+    .leaflet-bar a:hover {
+      border: none;
+      color: #1b75bb; }
+    .leaflet-bar a:first-child {
+      border-radius: 0px;
+      margin-bottom: 5px; }
+    .leaflet-bar a:last-child {
+      border-radius: 0px; }
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  font-size: 22px;
+  box-shadow: -2px 3px 3px 0px rgba(112, 112, 112, 0.54); }
+
+.category-filter--* {
+  background-size: 15px 15px;
+  background-position: center;
+  background-repeat: no-repeat; }
+
 /*# sourceMappingURL=main.css.map */

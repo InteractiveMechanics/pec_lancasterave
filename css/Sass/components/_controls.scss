@@ -1,0 +1,41 @@
+
+.leaflet-right .leaflet-control {
+	margin-right: 20px;
+}
+
+.leaflet-control {
+	border-radius: 0px;
+}
+
+.leaflet-bar {
+	box-shadow: none;
+
+	a {
+	color: #7b7b7b;
+	border: none;
+	transition: $transition;
+		&:hover {
+			border: none;
+			color: $blue;
+		}
+		&:first-child {
+		border-radius: 0px;
+		margin-bottom: 5px;
+		}
+		&:last-child {
+		border-radius: 0px;
+		}
+	}
+
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+	font-size: 22px;
+	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
+}
+
+.category-filter--* {
+	background-size: 15px 15px;
+	background-position: center;
+	background-repeat: no-repeat;
+}

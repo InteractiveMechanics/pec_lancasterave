@@ -1,12 +1,51 @@
-var map = L.map('map', {zoomControl:false }).setView([39.979268, -75.230733], 13);
+var map = L.map('map', {zoomControl:false }).setView([39.979268, -75.230733], 13, {layers: [infrastructureGroup, developmentGroup, civilrightsGroup, artsGroup]});
 
 L.tileLayer('https://api.mapbox.com/styles/v1/interactivemech/cith8vx1k000l2imon11lv5iq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW50ZXJhY3RpdmVtZWNoIiwiYSI6InJlcUtqSk0ifQ.RUwHuEkBbXoJ6SgOnXmYFg', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
 
+var infrastructureGroup = new L.layerGroup([]);
+var developmentGroup = new L.layerGroup([]);
+var civilrightsGroup = new L.layerGroup([]);
+var artsGroup = new L.layerGroup([]);
+
+var overlayMaps = {
+    'Infrastructure': infrastructureGroup,
+    'Development': developmentGroup,
+    'Civil Rights': civilrightsGroup,
+    'Arts': artsGroup
+};
+
+L.control.layers(null, overlayMaps).addTo(map);
+
 L.control.zoom({position:'bottomright'}).addTo(map);
 
+var customControlInfrastructure =  L.Control.extend({
+
+  options: {
+    position: 'bottomright'
+  },
+
+  onAdd: function (map) {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom category-filter--infrastructure');
+
+    container.style.backgroundColor = 'white';     
+    container.style.backgroundImage = "url(imgs/icons/icon-infrastructure.svg)";
+    container.style.backgroundSize = "15px 15px";
+    container.style.width = '25px';
+    container.style.height = '25px';
+
+
+    // container.onclick = function(){
+    //   console.log('buttonClicked');
+    // }
+
+    return container;
+  }
+});
+
+map.addControl(new customControlInfrastructure());
 
 var dataSuccess = function(jsonData) {
     console.log(jsonData);
@@ -78,6 +117,21 @@ var dataSuccess = function(jsonData) {
 
 		onEachFeature: function (featureData, layer) {
         //layer.bindPopup(feature.properties.GPSUserName);
+
+        	
+        	
+        	if (featureData.properties.category == 'arts') {
+        		artsGroup.addLayer(layer);
+        		console.log(artsGroup);
+        	} else if (featureData.properties.category == 'civil rights') {
+        		civilrightsGroup.addLayer(layer);
+        		console.log(civilrightsGroup);
+        	} else if (featureData.properties.category == 'development') {
+        		developmentGroup.addLayer(layer);
+        	} else if (featureData.properties.category == 'infrastructure') {
+        		infrastructureGroup.addLayer(layer);
+        	}
+
         	var clearPopup = function() {
         		$('#popup').html('');
         	}
@@ -118,15 +172,24 @@ var dataSuccess = function(jsonData) {
 
         	});
 
-	            console.log(featureData.properties.category);
-
 	        $( ".close" ).click(function() {
 			  $('#popup').addClass('hidden').removeClass('visible');
+			});
+
+			$('.category-filter--infrastructure').click(function() {
+				if (!featureData.properties.category == 'infrastructure') {
+					map.removeLayer();
+				}
 			});
 
 			 
  
     	}
+
+
+
+
+
 
 	};
 
