@@ -64,18 +64,56 @@
 
 .filter-arts {
 	background-image: url('../imgs/icons/icon-arts.svg');
+	&:hover {
+		transition: $transition;
+		&:before {
+			@include tooltip-body('Arts');
+		}
+		&:after {
+			@include tooltip-arrow;
+		}
+	}
+	
 }
 
 .filter-civilrights {
 	background-image: url('../imgs/icons/icon-civilrights.svg');
+	&:hover {
+		transition: $transition;
+		&:before {
+			@include tooltip-body('Civil Rights');
+		}
+		&:after {
+			@include tooltip-arrow;
+		}
+	}
+
 }
 
 .filter-development {
 	background-image: url('../imgs/icons/icon-development.svg');
+	&:hover {
+	transition: $transition;
+		&:before {
+			@include tooltip-body('Development');
+		}
+		&:after {
+			@include tooltip-arrow;
+		}
+	}
 }
 
 .filter-infrastructure {
 	background-image: url('../imgs/icons/icon-infrastructure.svg');
+	&:hover {
+	transition: $transition;
+		&:before {
+			@include tooltip-body('Infrastructure');
+		}
+		&:after {
+			@include tooltip-arrow;
+		}
+	}
 }
 
 
