@@ -1,10 +1,15 @@
 
 .leaflet-right .leaflet-control {
 	margin-right: 20px;
+	margin-bottom: 0px;
 }
 
 .leaflet-control {
 	border-radius: 0px;
+}
+
+.leaflet-control-layers {
+	display: none;
 }
 
 .leaflet-bar {
@@ -29,13 +34,49 @@
 
 }
 
+.leaflet-control-zoom {
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+}
+
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
 	font-size: 22px;
 	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
 }
 
-.category-filter--* {
-	background-size: 15px 15px;
+.category-filter {
+	background-color: #fff;
+	background-size: 16px 16px;
 	background-position: center;
 	background-repeat: no-repeat;
+	border: none;
+	height: 26px;
+	width: 26px;
+	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
+	opacity: 0.7;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
+
+.category-filter.active {
+	opacity: 1.0;
+}
+
+.filter-arts {
+	background-image: url('../imgs/icons/icon-arts.svg');
+}
+
+.filter-civilrights {
+	background-image: url('../imgs/icons/icon-civilrights.svg');
+}
+
+.filter-development {
+	background-image: url('../imgs/icons/icon-development.svg');
+}
+
+.filter-infrastructure {
+	background-image: url('../imgs/icons/icon-infrastructure.svg');
+}
+
+
+

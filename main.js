@@ -1,51 +1,65 @@
-var map = L.map('map', {zoomControl:false }).setView([39.979268, -75.230733], 13, {layers: [infrastructureGroup, developmentGroup, civilrightsGroup, artsGroup]});
+var map = L.map('map', {zoomControl:false }).setView([39.979268, -75.230733], 13);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/interactivemech/cith8vx1k000l2imon11lv5iq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW50ZXJhY3RpdmVtZWNoIiwiYSI6InJlcUtqSk0ifQ.RUwHuEkBbXoJ6SgOnXmYFg', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
 
 var infrastructureGroup = new L.layerGroup([]);
 var developmentGroup = new L.layerGroup([]);
 var civilrightsGroup = new L.layerGroup([]);
 var artsGroup = new L.layerGroup([]);
 
-var overlayMaps = {
-    'Infrastructure': infrastructureGroup,
-    'Development': developmentGroup,
-    'Civil Rights': civilrightsGroup,
-    'Arts': artsGroup
-};
+map.addLayer(infrastructureGroup).addLayer(developmentGroup).addLayer(civilrightsGroup).addLayer(artsGroup);
 
-L.control.layers(null, overlayMaps).addTo(map);
+// var overlays = {
+//     "<img src='imgs/icons/icon-infrastructure.svg' />": infrastructureGroup,
+//     "<img src='imgs/icons/icon-development.svg' />": developmentGroup,
+//     "<img src='imgs/icons/icon-civilrights.svg' />": civilrightsGroup,
+//     "<img src='imgs/icons/icon-arts.svg' />": artsGroup
+// };
+
+
 
 L.control.zoom({position:'bottomright'}).addTo(map);
-
-var customControlInfrastructure =  L.Control.extend({
-
-  options: {
-    position: 'bottomright'
-  },
-
-  onAdd: function (map) {
-    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom category-filter--infrastructure');
-
-    container.style.backgroundColor = 'white';     
-    container.style.backgroundImage = "url(imgs/icons/icon-infrastructure.svg)";
-    container.style.backgroundSize = "15px 15px";
-    container.style.width = '25px';
-    container.style.height = '25px';
+// L.control.layers(null, overlays, {position: 'bottomright', collapsed: false}).addTo(map);
 
 
-    // container.onclick = function(){
-    //   console.log('buttonClicked');
-    // }
 
-    return container;
-  }
+var customControlArts =  L.Control.extend({options: {position: 'bottomright'},
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-arts active');
+        return container;
+    }
 });
 
-map.addControl(new customControlInfrastructure());
+var customControlCivilRights =  L.Control.extend({options: {position: 'bottomright'},
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-civilrights active');
+        return container;
+    }
+});
+
+var customControlDevelopment =  L.Control.extend({options: {position: 'bottomright'},
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-development active');
+        return container;
+    }
+});
+
+var customControlInfrastructure =  L.Control.extend({options: {position: 'bottomright'},
+
+    onAdd: function (map) {
+        var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-infrastructure active');
+        return container;
+    }
+});
+
+
+map.addControl(new customControlArts()).addControl(new customControlCivilRights()).addControl(new customControlDevelopment()).addControl(new customControlInfrastructure());
+
 
 var dataSuccess = function(jsonData) {
     console.log(jsonData);
@@ -117,8 +131,6 @@ var dataSuccess = function(jsonData) {
 
 		onEachFeature: function (featureData, layer) {
         //layer.bindPopup(feature.properties.GPSUserName);
-
-        	
         	
         	if (featureData.properties.category == 'arts') {
         		artsGroup.addLayer(layer);
@@ -174,22 +186,9 @@ var dataSuccess = function(jsonData) {
 
 	        $( ".close" ).click(function() {
 			  $('#popup').addClass('hidden').removeClass('visible');
-			});
-
-			$('.category-filter--infrastructure').click(function() {
-				if (!featureData.properties.category == 'infrastructure') {
-					map.removeLayer();
-				}
-			});
-
-			 
+			});		 
  
     	}
-
-
-
-
-
 
 	};
 
@@ -200,6 +199,51 @@ var dataSuccess = function(jsonData) {
 };
 
 $.getJSON('data.json', dataSuccess);
+
+$('.filter-arts').click(function() {
+    if(map.hasLayer(artsGroup)) {
+        $(this).removeClass('active');
+        map.removeLayer(artsGroup);
+    } else {
+        map.addLayer(artsGroup);        
+        $(this).addClass('active');
+   }
+});
+
+$('.filter-civilrights').click(function() {
+    if(map.hasLayer(civilrightsGroup)) {
+        $(this).removeClass('active');
+        map.removeLayer(civilrightsGroup);
+    } else {
+        map.addLayer(civilrightsGroup);        
+        $(this).addClass('active');
+   }
+});
+
+$('.filter-development').click(function() {
+    if(map.hasLayer(developmentGroup)) {
+        $(this).addClass('active');
+        map.removeLayer(developmentGroup);
+    } else {
+        map.addLayer(developmentGroup);        
+        $(this).removeClass('active');
+   }
+});
+
+$('.filter-infrastructure').click(function() {
+    if(map.hasLayer(infrastructureGroup)) {
+        $(this).removeClass('active');
+        map.removeLayer(infrastructureGroup);
+    } else {
+        map.addLayer(infrastructureGroup);        
+        $(this).addClass('active');
+   }
+});
+
+
+
+
+
 
 
 
