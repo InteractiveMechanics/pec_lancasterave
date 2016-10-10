@@ -25,3 +25,51 @@
 	border-left: 9px solid white;
 	border-bottom: 11px solid transparent;
 }
+
+@mixin big-button($color_1, $color_2) {
+	font-family: $open-sans;
+	color: $color_1;
+	border: 2px solid $color_2;
+	background-color: $color_2;
+	transition: $transition;
+	&:link {
+		background-color: $color_2;
+		border-color: $color_2;
+		color: $color_1;
+	}
+	&:hover {
+		background-color: $color_1;
+		border-color: $color_2;
+		color: $color_2;
+		fill: $color_2;
+		text-decoration: none;
+	}
+	&:hover svg {
+		fill: $color_2;
+		left: 5px;
+	}
+	&:active {
+		background-color: $color_1;
+		border-color: $color_2;
+		color: $color_2;
+		box-shadow: none;
+	}
+	&:active svg {
+		fill: $color_2;
+		left: 5px;
+	}
+	&:focus, &:active:focus {
+		background-color: $color_1;
+		border-color: $color_2;
+		color: $color_2;
+		outline: 5px auto $color_1;
+	}
+	&:focus, &:active:focus svg {
+		fill: $color_2;
+		left: 5px;
+	}
+	&:visited {
+		background-color: $color_1;
+		border-color: $color_2;
+	}
+}

@@ -1,0 +1,91 @@
+#welcome {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: lighten($green, 27%);
+	z-index: 9999;
+	display: flex;
+	flex-direction: row;
+	article {
+		width: 67%;
+		padding: 50px;
+		p {
+			font-size: 1em;
+			width: 60%;
+			padding-bottom: 30px;
+			line-height: 1.8;
+		}
+	}
+	aside {
+		width: 33%;
+		display: flex;
+		flex-direction: column;
+		background-color: #ffffff;
+		button {
+			margin: 10px;
+			height: 25%;
+			color: #ffffff;
+			border: none;
+			padding: 15px;
+			.flex-fix { // button elements can't be flex containers in Firefox (flexbug #9)
+				display: flex;
+		    	flex-direction: column;
+		    	justify-content: flex-end;
+		    	height: 100%;
+			}
+			h4 {
+				font-size: 1.2em;
+				margin: 0px;
+				text-align: left;
+			}
+			h2 {
+				font-size: 2em;
+				margin: 0px;
+				width: 75%;
+				text-align: left
+			}
+			&:nth-of-type(1) {
+				background: linear-gradient(rgba(140,198,62, 0.55), rgba(140,198,62, 0.55)), url('../imgs/content/Belmont Theater.png');
+				background-size: cover;
+			}
+			&:nth-of-type(2) {
+				background: linear-gradient(rgba(101,44,144, 0.55), rgba(101, 44, 144, 0.55)), url('../imgs/content/kingontheave.jpg');
+				background-size: cover;
+
+			}
+			&:nth-of-type(3) {
+				background: linear-gradient(rgba(217,27,91, 0.55), rgba(217,27,91, 0.55)), url('../imgs/content/Infrastructure image.jpg');
+				background-size: cover;
+			}
+			&:nth-of-type(4) {
+				background: linear-gradient(rgba(251,175,63, 0.55), rgba(251,175,63, 0.55)), url('../imgs/content/hawthorne hall 1908.jpg');
+				background-size: cover;
+			}
+			svg {
+				float: right;
+				height: 36px;
+				width: auto;
+				path {
+					fill: #ffffff;
+				}
+			}
+		}
+
+	}
+}
+
+#explore-btn {
+	margin-right: 10px;
+}
+
+#explore-btn, #tour-btn {
+	@include big-button($light-green, #ffffff);
+	padding: 10px 30px;
+	font-size: 13px;
+	font-family: $open-sans;
+	font-weight: 700;
+	text-transform: uppercase;
+
+}

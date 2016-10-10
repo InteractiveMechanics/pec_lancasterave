@@ -240,6 +240,27 @@ $('.filter-infrastructure').click(function() {
    }
 });
 
+// Functions related to Welcome Screen
+
+
+var showWelcome = function() {
+    var $welcome = $('#welcome');
+    if ($welcome.hasClass('hidden')) {
+        $welcome.removeClass('hidden').removeClass('fade');
+    }
+}
+
+var hideWelcome = function() {
+    var $welcome = $('#welcome');
+    $welcome.addClass('hidden');
+}
+
+$(document).ready(showWelcome);
+
+$('#explore-btn').click(function() {
+    hideWelcome();
+})
+
 
 
 

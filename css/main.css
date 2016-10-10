@@ -290,4 +290,113 @@ hr {
       border-left: 9px solid white;
       border-bottom: 11px solid transparent; }
 
+#welcome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #cbe5a8;
+  z-index: 9999;
+  display: flex;
+  flex-direction: row; }
+  #welcome article {
+    width: 67%;
+    padding: 50px; }
+    #welcome article p {
+      font-size: 1em;
+      width: 60%;
+      padding-bottom: 30px;
+      line-height: 1.8; }
+  #welcome aside {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; }
+    #welcome aside button {
+      margin: 10px;
+      height: 25%;
+      color: #ffffff;
+      border: none;
+      padding: 15px; }
+      #welcome aside button .flex-fix {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%; }
+      #welcome aside button h4 {
+        font-size: 1.2em;
+        margin: 0px;
+        text-align: left; }
+      #welcome aside button h2 {
+        font-size: 2em;
+        margin: 0px;
+        width: 75%;
+        text-align: left; }
+      #welcome aside button:nth-of-type(1) {
+        background: linear-gradient(rgba(140, 198, 62, 0.55), rgba(140, 198, 62, 0.55)), url("../imgs/content/Belmont Theater.png");
+        background-size: cover; }
+      #welcome aside button:nth-of-type(2) {
+        background: linear-gradient(rgba(101, 44, 144, 0.55), rgba(101, 44, 144, 0.55)), url("../imgs/content/kingontheave.jpg");
+        background-size: cover; }
+      #welcome aside button:nth-of-type(3) {
+        background: linear-gradient(rgba(217, 27, 91, 0.55), rgba(217, 27, 91, 0.55)), url("../imgs/content/Infrastructure image.jpg");
+        background-size: cover; }
+      #welcome aside button:nth-of-type(4) {
+        background: linear-gradient(rgba(251, 175, 63, 0.55), rgba(251, 175, 63, 0.55)), url("../imgs/content/hawthorne hall 1908.jpg");
+        background-size: cover; }
+      #welcome aside button svg {
+        float: right;
+        height: 36px;
+        width: auto; }
+        #welcome aside button svg path {
+          fill: #ffffff; }
+
+#explore-btn {
+  margin-right: 10px; }
+
+#explore-btn, #tour-btn {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  color: #cbe5a8;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+  transition: all 0.25s ease-in-out;
+  padding: 10px 30px;
+  font-size: 13px;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase; }
+  #explore-btn:link, #tour-btn:link {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #cbe5a8; }
+  #explore-btn:hover, #tour-btn:hover {
+    background-color: #cbe5a8;
+    border-color: #ffffff;
+    color: #ffffff;
+    fill: #ffffff;
+    text-decoration: none; }
+  #explore-btn:hover svg, #tour-btn:hover svg {
+    fill: #ffffff;
+    left: 5px; }
+  #explore-btn:active, #tour-btn:active {
+    background-color: #cbe5a8;
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: none; }
+  #explore-btn:active svg, #tour-btn:active svg {
+    fill: #ffffff;
+    left: 5px; }
+  #explore-btn:focus, #explore-btn:active:focus, #tour-btn:focus, #tour-btn:active:focus {
+    background-color: #cbe5a8;
+    border-color: #ffffff;
+    color: #ffffff;
+    outline: 5px auto #cbe5a8; }
+  #explore-btn:focus, #explore-btn:active:focus svg, #tour-btn:focus, #tour-btn:active:focus svg {
+    fill: #ffffff;
+    left: 5px; }
+  #explore-btn:visited, #tour-btn:visited {
+    background-color: #cbe5a8;
+    border-color: #ffffff; }
+
 /*# sourceMappingURL=main.css.map */
