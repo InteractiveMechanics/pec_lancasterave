@@ -63,42 +63,6 @@ var customControlCategories = L.Control.extend({options: {position: 'bottomright
 map.addControl(new customControlCategories);
 
 
-// var customControlArts =  L.Control.extend({options: {position: 'bottomright'},
-
-//     onAdd: function (map) {
-//         var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-arts active');
-//         return container;
-//     }
-// });
-
-// var customControlCivilRights =  L.Control.extend({options: {position: 'bottomright'},
-
-//     onAdd: function (map) {
-//         var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-civilrights active');
-//         return container;
-//     }
-// });
-
-// var customControlDevelopment =  L.Control.extend({options: {position: 'bottomright'},
-
-//     onAdd: function (map) {
-//         var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-development active');
-//         return container;
-//     }
-// });
-
-// var customControlInfrastructure =  L.Control.extend({options: {position: 'bottomright'},
-
-//     onAdd: function (map) {
-//         var container = L.DomUtil.create('button', 'leaflet-bar leaflet-control leaflet-control-custom category-filter filter-infrastructure active');
-//         return container;
-//     }
-// });
-
-
-// map.addControl(new customControlArts()).addControl(new customControlCivilRights()).addControl(new customControlDevelopment()).addControl(new customControlInfrastructure());
-
-
 var customControlLogo = L.Control.extend({options: {position: 'topright'},
     
     onAdd: function (map) {
@@ -207,6 +171,9 @@ var dataSuccess = function(jsonData) {
                 if ($era[i] === 'era-3') {
                     era3Group.addLayer(layer)
                 }
+                if ($era[i] == 'era-4') {
+                    era4Group.addLayer(layer)
+                }
             }
 
 
@@ -215,10 +182,18 @@ var dataSuccess = function(jsonData) {
         		$('#popup').html('');
         	}
 
+            var updateOpacity = function() {
+
+            }
+
+
+
         	layer.on('click', function (e) {
             	//clearPopup();
             	var $popup = $('#popup');
             	var $category = featureData.properties.category;
+                $('.leaflet-marker-icon').css('opacity', '0.7');
+                layer.setOpacity(1.0);
             	if ($popup.hasClass('hidden')) {
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
@@ -253,6 +228,7 @@ var dataSuccess = function(jsonData) {
 
 	        $( ".close" ).click(function() {
 			  $('#popup').addClass('hidden').removeClass('visible');
+              $('.leaflet-marker-icon').css('opacity', '1.0');
 			});		 
  
     	}
