@@ -20,8 +20,8 @@
             "resourceTitle": "Civil Rights in a Northern City: Philadelphia",
             "resourceUrl": "http://northerncity.library.temple.edu/content/reverend-dr-martin-luther-king-6",
             "date": "8/3/1965",
-            "era": "1960-1979",
-            "category": "civil rights"
+            "era": ["era-1"],
+            "category": "civilrights"
           }
         },
 
@@ -44,8 +44,8 @@
             "resourceTitle": "The Paul Robeson House",
             "resourceUrl": "http://paulrobesonhouse.org/",
             "date": "1966-1976",
-            "era": "1960-1979",
-            "category": "civil rights"
+            "era": ["era-3"],
+            "category": "civilrights"
           }
         },
 
@@ -68,7 +68,7 @@
             "resourceTitle": "The Ellen Powell Tiberino Memorial Museum",
             "resourceUrl": "http://www.tiberinomuseum.org/",
             "date": "1966-1976",
-            "era": "1960-1979",
+            "era": ["era-1", "era-2"],
             "category": "arts"
           }
         }

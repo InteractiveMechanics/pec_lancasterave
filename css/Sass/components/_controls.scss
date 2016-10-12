@@ -53,68 +53,131 @@
 	height: 26px;
 	width: 26px;
 	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
-	opacity: 0.7;
+	//opacity: 0.7;
 	margin-top: 0px;
 	margin-bottom: 0px;
+	font-family: $alegreya;
+	text-align: right;
+	color: $grey;
 }
 
 .category-filter.active {
 	opacity: 1.0;
 }
 
-.filter-arts {
-	background-image: url('../imgs/icons/icon-arts.svg');
-	&:hover {
-		transition: $transition;
-		&:before {
-			@include tooltip-body('Arts');
-		}
-		&:after {
-			@include tooltip-arrow;
-		}
+.btn-content {
+	display: none;
+}
+
+.categories-wrapper {
+	button {
+		display: block;
 	}
-	
+
+	&:hover {
+		.btn-content {
+			display: initial;
+			position: relative;
+			right: 30px;
+		}
+		.category-filter {
+			width: 200px;
+			background-position: 177px;
+		}
+
+	}
+}
+
+.titles-wrapper {
+	background-color: #ffffff;
+	position: absolute;
+	right: 26px;
+	display: none;
+}
+
+.filter-arts {
+	@include arts-icon($grey);
+}
+
+.filter-arts.active {
+	color: $blue;
+	@include arts-icon($blue);
 }
 
 .filter-civilrights {
-	background-image: url('../imgs/icons/icon-civilrights.svg');
-	&:hover {
-		transition: $transition;
-		&:before {
-			@include tooltip-body('Civil Rights');
-		}
-		&:after {
-			@include tooltip-arrow;
-		}
-	}
-
+	@include civilrights-icon($grey);
 }
 
+.filter-civilrights.active {
+	color: $brown;
+	@include civilrights-icon($brown);
+}
+
+
 .filter-development {
-	background-image: url('../imgs/icons/icon-development.svg');
-	&:hover {
-	transition: $transition;
-		&:before {
-			@include tooltip-body('Development');
-		}
-		&:after {
-			@include tooltip-arrow;
-		}
-	}
+	@include development-icon($grey);
+}
+
+.filter-development.active {
+	color: $orange;
+	@include development-icon($orange);
 }
 
 .filter-infrastructure {
-	background-image: url('../imgs/icons/icon-infrastructure.svg');
-	&:hover {
+	@include infrastructure-icon($grey);
+}
+
+.filter-infrastructure.active {
+	color: $pink;
+	@include infrastructure-icon($pink);
+}
+
+
+.logo-btn {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 	transition: $transition;
-		&:before {
-			@include tooltip-body('Infrastructure');
-		}
-		&:after {
-			@include tooltip-arrow;
+	img {
+		width: 130px;
+	}
+	&:hover {
+		img {
+			opacity: 0.7;
 		}
 	}
 }
 
-
+.timeline-wrapper {
+	height: 65px;
+	border-radius: 0px;
+	display: flex;
+	padding: 5px;
+	align-items: flex-end;
+	background-color: #ffffff;
+	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
+	margin-bottom: 10px !important;
+	button {
+		border: none;
+		background-color: #ffffff;
+		border-top: 6px solid #b7b7b7;
+		margin: 0px 4px;
+		font-family: $open-sans;
+		color: #b7b7b7;
+		font-weight: 700;
+		text-transform: uppercase;
+		padding-top: 5px;
+		cursor: pointer;
+		width: 73px;
+		transition: $transition;
+		&:hover {
+			color: $green;
+			border-color: $green;
+		}
+	}
+	.active {
+		color: $green;
+		border-color: $green;
+	}
+}
 

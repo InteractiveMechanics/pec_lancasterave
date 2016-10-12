@@ -5,12 +5,18 @@
 	width: 100%;
 	height: 100%;
 	background-color: lighten($green, 27%);
+	background-image: url('../imgs/content/modal-background@2x.jpg');
+	background-size: 100% auto;
+	background-position: bottom;
 	z-index: 9999;
 	display: flex;
 	flex-direction: row;
 	article {
 		width: 67%;
 		padding: 50px;
+		img {
+			width: 165px;
+		}
 		p {
 			font-size: 1em;
 			width: 60%;
@@ -29,11 +35,13 @@
 			color: #ffffff;
 			border: none;
 			padding: 15px;
+			transition: $transition;
 			.flex-fix { // button elements can't be flex containers in Firefox (flexbug #9)
 				display: flex;
 		    	flex-direction: column;
 		    	justify-content: flex-end;
 		    	height: 100%;
+		    	transition: $transition;
 			}
 			h4 {
 				font-size: 1.2em;
@@ -48,20 +56,22 @@
 			}
 			&:nth-of-type(1) {
 				background: linear-gradient(rgba(140,198,62, 0.55), rgba(140,198,62, 0.55)), url('../imgs/content/Belmont Theater.png');
-				background-size: cover;
+				background-size: 100% auto;
 			}
 			&:nth-of-type(2) {
-				background: linear-gradient(rgba(101,44,144, 0.55), rgba(101, 44, 144, 0.55)), url('../imgs/content/kingontheave.jpg');
-				background-size: cover;
+				background: linear-gradient(rgba(89,74,65, 0.55), rgba(89,74,65, 0.55)), url('../imgs/content/kingontheave.jpg');
+				background-size: 100% auto;
 
 			}
 			&:nth-of-type(3) {
 				background: linear-gradient(rgba(217,27,91, 0.55), rgba(217,27,91, 0.55)), url('../imgs/content/Infrastructure image.jpg');
-				background-size: cover;
+				background-size: 100% auto;
+				background-position: bottom;
 			}
 			&:nth-of-type(4) {
 				background: linear-gradient(rgba(251,175,63, 0.55), rgba(251,175,63, 0.55)), url('../imgs/content/hawthorne hall 1908.jpg');
-				background-size: cover;
+				background-size: 100% auto;
+				background-position: center;
 			}
 			svg {
 				float: right;
@@ -70,6 +80,10 @@
 				path {
 					fill: #ffffff;
 				}
+			}
+			&:hover {
+				background-size: 110% auto;
+				transition: $transition;
 			}
 		}
 
