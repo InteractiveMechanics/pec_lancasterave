@@ -73,8 +73,9 @@
 	button {
 		display: block;
 	}
-
+	transition: $transition; 
 	&:hover {
+		transition: $transition;
 		.btn-content {
 			display: initial;
 			position: relative;
@@ -139,7 +140,8 @@
 	cursor: pointer;
 	transition: $transition;
 	img {
-		width: 130px;
+		filter: drop-shadow(1px 4px 2px rgba(90, 90, 90, 0.9));
+		width: 160px;
 	}
 	&:hover {
 		img {

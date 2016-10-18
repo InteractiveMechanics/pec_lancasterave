@@ -1,4 +1,4 @@
-var map = L.map('map', {zoomControl:false }).setView([39.979268, -75.230733], 13);
+var map = L.map('map', {zoomControl:false }).setView([39.967764, -75.229737], 13.5);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/interactivemech/cith8vx1k000l2imon11lv5iq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW50ZXJhY3RpdmVtZWNoIiwiYSI6InJlcUtqSk0ifQ.RUwHuEkBbXoJ6SgOnXmYFg', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -13,9 +13,9 @@ var infrastructureGroup = new L.layerGroup([]);
 var developmentGroup = new L.layerGroup([]);
 var civilrightsGroup = new L.layerGroup([]);
 var artsGroup = new L.layerGroup([]);
+var allCategoriesGroup = new L.layerGroup([infrastructureGroup, developmentGroup, artsGroup, civilrightsGroup]);
 
-
-map.addLayer(infrastructureGroup).addLayer(developmentGroup).addLayer(civilrightsGroup).addLayer(artsGroup);
+map.addLayer(infrastructureGroup).addLayer(developmentGroup).addLayer(civilrightsGroup).addLayer(artsGroup).addLayer(allCategoriesGroup);
 
 
 // Timeline Layers
@@ -29,11 +29,12 @@ var era6Group = new L.layerGroup([]);
 var era7Group = new L.layerGroup([]);
 var era8Group = new L.layerGroup([]);
 var era9Group = new L.layerGroup([]);
-var era10group = new L.layerGroup([]);
+var era10Group = new L.layerGroup([]);
 var era11Group = new L.layerGroup([]);
-var allerasGroup = new L.layerGroup([era1Group, era2Group, era3Group, era4Group, era5Group, era6Group, era7Group, era8Group, era9Group, era10group, era11Group]);
+var eraNoneGroup = new L.LayerGroup([]);
+var allerasGroup = new L.layerGroup([era1Group, era2Group, era3Group, era4Group, era5Group, era6Group, era7Group, era8Group, era9Group, era10Group, era11Group, eraNoneGroup]);
 
-map.addLayer(era1Group).addLayer(era2Group).addLayer(era3Group).addLayer(era4Group).addLayer(era5Group).addLayer(era6Group).addLayer(era7Group).addLayer(era8Group).addLayer(era9Group).addLayer(era10group).addLayer(era11Group).addLayer(allerasGroup);
+map.addLayer(era1Group).addLayer(era2Group).addLayer(era3Group).addLayer(era4Group).addLayer(era5Group).addLayer(era6Group).addLayer(era7Group).addLayer(era8Group).addLayer(era9Group).addLayer(era10Group).addLayer(era11Group).addLayer(allerasGroup).addLayer(eraNoneGroup);
 
 // Custom Controls
 
@@ -67,7 +68,7 @@ var customControlLogo = L.Control.extend({options: {position: 'topright'},
     
     onAdd: function (map) {
         var container = L.DomUtil.create('button', 'logo-btn');
-        container.innerHTML = '<img src="imgs/logo.svg" alt="logo">';
+        container.innerHTML = '<img src="imgs/logo-inverse.svg" alt="logo" id="map-logo">';
         return container;
     }
 });
@@ -76,7 +77,72 @@ map.addControl(new customControlLogo());
 
 // Add Data to Map
 
-var dataSuccess = function(jsonData) {
+var dataSuccess = function(data) {
+    var jsonData = { "type": "FeatureCollection", "features": [] };
+
+            $.each(data, function(index, value){
+                if (value.latitude && value.longitude){
+
+            var getImageUrl = function(id) {
+                        $.getJSON("http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/" + id, function(data) {
+                        if (data.guid) {
+                            //console.log(data.guid.rendered);
+                            var imageURL = data.guid.rendered;
+                            console.log(imageURL);
+                            return imageURL;
+                        } else {
+                            console.log('nothing to show');
+                        } 
+                     });
+                    };
+
+            
+            var rawEra = value.time_period;
+            var removeCurlyBraces = rawEra.replace(/[{}]/g, "");
+            
+            function extractText( str ){
+              var ret = "";
+
+              if ( /"/.test( str ) ){
+                ret = str.match( /"(.*?)"/g );
+              } else {
+                ret = str;
+              }
+
+              return ret;
+            }
+
+            var obj = extractText(removeCurlyBraces);
+            var array = Object.keys(obj).map(function (key) { return obj[key]; });
+            console.log(array);
+        
+
+            var dataToAdd = {};
+            dataToAdd["type"] = "Feature";
+            dataToAdd["geometry"] = {};
+            dataToAdd["geometry"]["type"] = "Point";
+            dataToAdd["geometry"]["coordinates"] = [value.longitude, value.latitude]
+
+            dataToAdd["properties"] = {};
+            dataToAdd["properties"]["title"] = value.post_title;
+            dataToAdd["properties"]["description"] = value.post_content;
+            dataToAdd["properties"]["sourceTitle"] = value.source_title;
+            dataToAdd["properties"]["sourceUrl"] = value.source_link;
+            dataToAdd["properties"]["img"] = getImageUrl(value.image);
+            dataToAdd["properties"]["caption"] = value.image_caption;
+            dataToAdd["properties"]["attr"] = value.image_attribution;
+            dataToAdd["properties"]["attrUrl"] = value.image_attribution_url;
+            dataToAdd["properties"]["presentAddress"] = value.street_address;
+            dataToAdd["properties"]["resourceTitle"] = value.resource_title;
+            dataToAdd["properties"]["resourceUrl"] = value.resource_link;
+            dataToAdd["properties"]["era"] = array;
+            dataToAdd["properties"]["category"] = value.category;
+    
+            jsonData["features"].push(dataToAdd);
+
+           
+        }
+    });
     console.log(jsonData);
     var layerOptions = {
         pointToLayer: function(featureData, latlng) {
@@ -89,7 +155,7 @@ var dataSuccess = function(jsonData) {
 		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
 
 			var civilrightsIcon = L.icon({
@@ -98,7 +164,7 @@ var dataSuccess = function(jsonData) {
 		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
 
 			var developmentIcon = L.icon({
@@ -107,7 +173,7 @@ var dataSuccess = function(jsonData) {
 		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
 
 			var infrastructureIcon = L.icon({
@@ -116,7 +182,7 @@ var dataSuccess = function(jsonData) {
 		    iconSize:     [67.5, 60], // size of the icon
 		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
 
 			var getIcon = function(x) {
@@ -130,7 +196,7 @@ var dataSuccess = function(jsonData) {
 			  icon = developmentIcon;
 			} else if (x == 'infrastructure') {
 			  icon = infrastructureIcon;
-			}
+			} 
 
 			return icon;
 			},
@@ -151,10 +217,8 @@ var dataSuccess = function(jsonData) {
         	
         	if (featureData.properties.category == 'arts') {
         		artsGroup.addLayer(layer);
-        		console.log(artsGroup);
         	} else if (featureData.properties.category == 'civilrights') {
         		civilrightsGroup.addLayer(layer);
-        		console.log(civilrightsGroup);
         	} else if (featureData.properties.category == 'development') {
         		developmentGroup.addLayer(layer);
         	} else if (featureData.properties.category == 'infrastructure') {
@@ -162,18 +226,43 @@ var dataSuccess = function(jsonData) {
         	}
 
             for (var i = 0; i < $era.length; i++) {
-                if ($era[i] === 'era-1') {
+                if ($era[i] === '"era-1"') {
                     era1Group.addLayer(layer);
                 }
-                if ($era[i] === 'era-2') {
+                if ($era[i] === '"era-2"') {
                     era2Group.addLayer(layer)
                 }
-                if ($era[i] === 'era-3') {
+                if ($era[i] === '"era-3"') {
                     era3Group.addLayer(layer)
                 }
-                if ($era[i] == 'era-4') {
+                if ($era[i] == '"era-4"') {
                     era4Group.addLayer(layer)
                 }
+                if ($era[i] == '"era-5"') {
+                    era5Group.addLayer(layer) 
+                }
+                if ($era[i] == '"era-6"') {
+                    era6Group.addLayer(layer)
+                }
+                if ($era[i] == '"era-7"') {
+                    era7Group.addLayer(layer)
+                }
+                if ($era[i] == '"era-8"') {
+                    era8Group.addLayer(layer)
+                }
+                if ($era[i] == '"era-9"') {
+                    era9Group.addLayer(layer)
+                }
+                if ($era[i] == '"era-10"') {
+                    era10Group.addLayer(layer)
+                }
+                if ($era[i] == '"era-11"') {
+                    era11Group.addLayer(layer)
+                }
+                if ($era[i] == '" "') {
+                    eraNoneGroup.addLayer(layer);
+                }
+
             }
 
 
@@ -182,12 +271,7 @@ var dataSuccess = function(jsonData) {
         		$('#popup').html('');
         	}
 
-            var updateOpacity = function() {
-
-            }
-
-
-
+            
         	layer.on('click', function (e) {
             	//clearPopup();
             	var $popup = $('#popup');
@@ -195,19 +279,23 @@ var dataSuccess = function(jsonData) {
                 $('.leaflet-marker-icon').css('opacity', '0.7');
                 layer.setOpacity(1.0);
             	if ($popup.hasClass('hidden')) {
+
+
+                   
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
             		$('#title').html(featureData.properties.title);
-            		$('#img').attr('src', featureData.properties.img);
+            		$('#img').attr('src', 'http://dev.interactivemechanics.com//lancasterave//data//wp-content//uploads//2016//10//kingontheave.jpg');
             		$('#address').html(featureData.properties.presentAddress);
             		$('#caption').html(featureData.properties.caption);
             		$('#attr').html(featureData.properties.attr);
-            		$('#attrUrl').attr('href', 'featureData.properties.attrUrl');
+            		$('#attrUrl').attr('href', featureData.properties.attrUrl);
             		$('#description').html(featureData.properties.description);
-            		$('#sourceUrl').attr('href', 'featuredata.properties.sourceUrl');
+            		$('#sourceUrl').attr('href', featureData.properties.sourceUrl);
             		$('#sourceTitle').html(featureData.properties.sourceTitle);
             		$('#resourceTitle').html(featureData.properties.resourceTitle);
-            		$('#resourceUrl').attr('href', 'featureData.properties.resourceUrl');
+            		$('#resourceUrl').attr('href', featureData.properties.resourceUrl);
+                    $('#era').html(featureData.properties.era);
             		if ($category == 'civilrights') {
             			$('#icon').attr('src', 'imgs/icons/icon-civilrights.svg')
             			$('#address').css({'color': '#594a41'});
@@ -216,11 +304,12 @@ var dataSuccess = function(jsonData) {
             			$('#address').css({'color': '#1b75bb'});
             		} else if ($category == 'development') {
             			$('#icon').attr('src', 'imgs/icons/icon-development.svg');
-            			$('#address').css({'color': '#d91b5b'});
+            			$('#address').css({'color': '#fbaf3f'});
             		} else if ($category == 'infrastructure') {
             			$('#icon').attr('src', 'imgs/icons/icon-infrastructure.svg');
-            			$('#address').css({'color': '#fbaf3f'})
+            			$('#address').css({'color': '#d91b5b'})
             		}
+                   
 
            		}
 
@@ -241,7 +330,22 @@ var dataSuccess = function(jsonData) {
 
 };
 
-$.getJSON('data.json', dataSuccess);
+$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
+
+// Image Function
+
+
+
+// var getImageUrl = function(id) {
+//     $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/'+ id, function(data) {
+//         //console.log(data.guid.rendered);
+//         if (data.guid) {
+//         return data.guid.rendered;
+//         } else {
+//         return 'https://images3.alphacoders.com/274/274725.jpg';
+//         }
+//     }); 
+// } 
 
 
 // Map Btn Functions - Except Timeline
@@ -295,7 +399,7 @@ $('#era-all').click(function() {
     } 
     $(this).addClass('active');
     map.addLayer(allerasGroup);
-
+    map.addLayer(allCategoriesGroup);
 });
 
 $('#era-1').click(function() {
@@ -375,6 +479,7 @@ $('#arts-btn').click(function() {
     if (map.hasLayer(developmentGroup)) {
         map.removeLayer(developmentGroup);
     }
+    map.addLayer(artsGroup);
 })
 
 
@@ -389,6 +494,7 @@ $('#civilrights-btn').click(function() {
     if (map.hasLayer(developmentGroup)) {
         map.removeLayer(developmentGroup);
     }
+    map.addLayer(civilrightsGroup);
 })
 
 $('#infrastructure-btn').click(function() {
@@ -402,6 +508,7 @@ $('#infrastructure-btn').click(function() {
     if (map.hasLayer(developmentGroup)) {
         map.removeLayer(developmentGroup);
     }
+    map.addLayer(infrastructureGroup);
 })
 
 $('#development-btn').click(function() {
@@ -415,6 +522,7 @@ $('#development-btn').click(function() {
     if (map.hasLayer(artsGroup)) {
         map.removeLayer(artsGroup);
     }
+    map.addLayer(developmentGroup);
 })
 
 
