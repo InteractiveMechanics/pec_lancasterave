@@ -278,7 +278,7 @@ var dataSuccess = function(data) {
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
             		$('#title').html(featureData.properties.title);
-            		$('#img').attr('src', 'http://dev.interactivemechanics.com//lancasterave//data//wp-content//uploads//2016//10//kingontheave.jpg');
+            		$('#img').attr('src', featureData.properties.img);
             		$('#address').html(featureData.properties.presentAddress);
             		$('#caption').html(featureData.properties.caption);
             		$('#attr').html(featureData.properties.attr);
