@@ -276,14 +276,14 @@ hr {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #cbe5a8;
-  background-image: url("../imgs/content/modal-background@2x.jpg");
-  background-size: 100% auto;
-  background-position: bottom;
   z-index: 9999;
   display: flex;
   flex-direction: row; }
   #welcome article {
+    background-color: #cbe5a8;
+    background-image: url("../imgs/content/modal-background@2x.jpg");
+    background-size: 100% auto;
+    background-position: bottom;
     width: 67%;
     padding: 50px; }
     #welcome article img {
