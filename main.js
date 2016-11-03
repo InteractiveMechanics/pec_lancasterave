@@ -81,60 +81,59 @@ var jsonData = { "type": "FeatureCollection", "features": [] };
 var dataSuccess = function(data) {
 
     $.each(data, function(index, value){
-        if (value.latitude && value.longitude && value.image){
-
-            $.getJSON("http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/" + value.image, function(d) {
-                if (d.guid) {
-                    //console.log(data.guid.rendered);
-                    var imageURL = d.guid.rendered;
-                    var rawEra = value.time_period;
-                    var removeCurlyBraces = rawEra.replace(/[{}]/g, "");
-                    
-                    function extractText( str ){
-                        var ret = "";
-        
-                        if ( /"/.test( str ) ){
-                            ret = str.match( /"(.*?)"/g );
-                        } else {
-                            ret = str;
-                        }
-        
-                        return ret;
-                    }
-        
-                    var obj = extractText(removeCurlyBraces);
-                    var array = Object.keys(obj).map(function (key) { return obj[key]; });
-                    console.log(array);
-                
-        
-                    var dataToAdd = {};
-                    dataToAdd["type"] = "Feature";
-                    dataToAdd["geometry"] = {};
-                    dataToAdd["geometry"]["type"] = "Point";
-                    dataToAdd["geometry"]["coordinates"] = [value.longitude, value.latitude]
-        
-                    dataToAdd["properties"] = {};
-                    dataToAdd["properties"]["title"] = value.post_title;
-                    dataToAdd["properties"]["description"] = value.post_content;
-                    dataToAdd["properties"]["sourceTitle"] = value.source_title;
-                    dataToAdd["properties"]["sourceUrl"] = value.source_link;
-                    dataToAdd["properties"]["img"] = imageURL;
-                    dataToAdd["properties"]["caption"] = value.image_caption;
-                    dataToAdd["properties"]["attr"] = value.image_attribution;
-                    dataToAdd["properties"]["attrUrl"] = value.image_attribution_url;
-                    dataToAdd["properties"]["presentAddress"] = value.street_address;
-                    dataToAdd["properties"]["resourceTitle"] = value.resource_title;
-                    dataToAdd["properties"]["resourceUrl"] = value.resource_link;
-                    dataToAdd["properties"]["era"] = array;
-                    dataToAdd["properties"]["category"] = value.category;
+        if (value.latitude && value.longitude){
+            var rawEra = value.time_period;
+            var removeCurlyBraces = rawEra.replace(/[{}]/g, "");
             
-                    jsonData["features"].push(dataToAdd);
+            function extractText( str ){
+                var ret = "";
 
+                if ( /"/.test( str ) ){
+                    ret = str.match( /"(.*?)"/g );
                 } else {
-                    console.log('Point not added.');
+                    ret = str;
                 }
-            });
-       
+
+                return ret;
+            }
+
+            var obj = extractText(removeCurlyBraces);
+            var array = Object.keys(obj).map(function (key) { return obj[key]; });
+            //console.log(array);
+        
+
+            var dataToAdd = {};
+            dataToAdd["type"] = "Feature";
+            dataToAdd["geometry"] = {};
+            dataToAdd["geometry"]["type"] = "Point";
+            dataToAdd["geometry"]["coordinates"] = [value.longitude, value.latitude]
+
+            dataToAdd["properties"] = {};
+            dataToAdd["properties"]["title"] = value.post_title;
+            dataToAdd["properties"]["description"] = value.post_content;
+            dataToAdd["properties"]["sourceTitle"] = value.source_title;
+            dataToAdd["properties"]["sourceUrl"] = value.source_link;
+            dataToAdd["properties"]["caption"] = value.image_caption;
+            dataToAdd["properties"]["img"] = '';
+            dataToAdd["properties"]["attr"] = value.image_attribution;
+            dataToAdd["properties"]["attrUrl"] = value.image_attribution_url;
+            dataToAdd["properties"]["presentAddress"] = value.street_address;
+            dataToAdd["properties"]["resourceTitle"] = value.resource_title;
+            dataToAdd["properties"]["resourceUrl"] = value.resource_link;
+            dataToAdd["properties"]["era"] = array;
+            dataToAdd["properties"]["category"] = value.category;
+    
+            jsonData["features"].push(dataToAdd);
+
+            if (value.image){
+                $.getJSON("http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/" + value.image, function(d) {
+                    if (d.source_url) {
+                        console.log(d.source_url, index);
+                        var imageURL = d.source_url;
+                        jsonData["features"][index]["properties"]["img"] = imageURL;
+                    }
+                });
+            }
         }
     });
 
@@ -318,10 +317,8 @@ var dataSuccess = function(data) {
 
 	};
 
-
 	var inventoryLayer = L.geoJson(jsonData, layerOptions);
 	map.addLayer(inventoryLayer);
-
 };
 
 $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
