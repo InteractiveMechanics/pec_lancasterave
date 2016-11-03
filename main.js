@@ -68,7 +68,7 @@ var customControlLogo = L.Control.extend({options: {position: 'topright'},
     
     onAdd: function (map) {
         var container = L.DomUtil.create('button', 'logo-btn');
-        container.innerHTML = '<img src="imgs/logo-inverse.svg" alt="logo" id="map-logo">';
+        container.innerHTML = '<img src="imgs/logo.svg" alt="logo" id="map-logo">';
         return container;
     }
 });
@@ -146,7 +146,7 @@ var dataSuccess = function(data) {
 		    iconUrl: 'imgs/markers/mapmarker-arts@2x.png',
 
 		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
@@ -155,7 +155,7 @@ var dataSuccess = function(data) {
 		    iconUrl: 'imgs/markers/mapmarker-civilrights@2x.png',
 
 		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
@@ -164,7 +164,7 @@ var dataSuccess = function(data) {
 		    iconUrl: 'imgs/markers/mapmarker-development@2x.png',
 
 		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});
@@ -173,7 +173,7 @@ var dataSuccess = function(data) {
 		    iconUrl: 'imgs/markers/mapmarker-infrastructure@2x.png',
 
 		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [10, 10], // point of the icon which will correspond to marker's location
+		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
 		    //shadowAnchor: [12, 12],  // the same for the shadow
 		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
 			});

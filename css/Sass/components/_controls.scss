@@ -19,9 +19,15 @@
 	color: #7b7b7b;
 	border: none;
 	transition: $transition;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
 		&:hover {
 			border: none;
 			color: $blue;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
 		}
 		&:first-child {
 		border-radius: 0px;
@@ -40,18 +46,18 @@
 }
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-	font-size: 22px;
+	font-size: 25px;
 	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
 }
 
 .category-filter {
 	background-color: #fff;
-	background-size: 16px 16px;
+	background-size: 25px 25px;
 	background-position: center;
 	background-repeat: no-repeat;
 	border: none;
-	height: 26px;
-	width: 26px;
+	height: 40px;
+	width: 40px;
 	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
 	//opacity: 0.7;
 	margin-top: 0px;
@@ -79,11 +85,12 @@
 		.btn-content {
 			display: initial;
 			position: relative;
-			right: 30px;
+			right: 35px;
+			font-size: 1.3em;
 		}
 		.category-filter {
-			width: 200px;
-			background-position: 177px;
+			width: 250px;
+			background-position: 217px;
 		}
 
 	}
@@ -152,6 +159,7 @@
 
 .timeline-wrapper {
 	height: 65px;
+	width: 100%;
 	border-radius: 0px;
 	display: flex;
 	padding: 5px;

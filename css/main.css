@@ -147,10 +147,16 @@ hr {
   .leaflet-bar a {
     color: #7b7b7b;
     border: none;
-    transition: all 0.25s ease-in-out; }
+    transition: all 0.25s ease-in-out;
+    width: 40px;
+    height: 40px;
+    line-height: 40px; }
     .leaflet-bar a:hover {
       border: none;
-      color: #1b75bb; }
+      color: #1b75bb;
+      width: 40px;
+      height: 40px;
+      line-height: 40px; }
     .leaflet-bar a:first-child {
       border-radius: 0px;
       margin-bottom: 5px; }
@@ -162,17 +168,17 @@ hr {
   margin-bottom: 10px !important; }
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
-  font-size: 22px;
+  font-size: 25px;
   box-shadow: -2px 3px 3px 0px rgba(112, 112, 112, 0.54); }
 
 .category-filter {
   background-color: #fff;
-  background-size: 16px 16px;
+  background-size: 25px 25px;
   background-position: center;
   background-repeat: no-repeat;
   border: none;
-  height: 26px;
-  width: 26px;
+  height: 40px;
+  width: 40px;
   box-shadow: -2px 3px 3px 0px rgba(112, 112, 112, 0.54);
   margin-top: 0px;
   margin-bottom: 0px;
@@ -195,10 +201,11 @@ hr {
     .categories-wrapper:hover .btn-content {
       display: initial;
       position: relative;
-      right: 30px; }
+      right: 35px;
+      font-size: 1.3em; }
     .categories-wrapper:hover .category-filter {
-      width: 200px;
-      background-position: 177px; }
+      width: 250px;
+      background-position: 217px; }
 
 .titles-wrapper {
   background-color: #ffffff;
@@ -247,6 +254,7 @@ hr {
 
 .timeline-wrapper {
   height: 65px;
+  width: 100%;
   border-radius: 0px;
   display: flex;
   padding: 5px;
