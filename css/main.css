@@ -299,12 +299,14 @@ hr {
     flex-direction: column;
     background-color: #ffffff; }
     #welcome aside button {
-      margin: 10px;
+      margin: 15px 15px 0px 15px;
       height: 25%;
       color: #ffffff;
       border: none;
       padding: 15px;
       transition: all 0.25s ease-in-out; }
+      #welcome aside button:last-of-type {
+        margin: 15px; }
       #welcome aside button .flex-fix {
         display: flex;
         flex-direction: column;
@@ -316,20 +318,22 @@ hr {
         margin: 0px;
         text-align: left; }
       #welcome aside button h2 {
-        font-size: 2em;
+        font-size: 2.2em;
         margin: 0px;
-        width: 75%;
+        width: 80%;
         text-align: left; }
       #welcome aside button:nth-of-type(1) {
         background: linear-gradient(rgba(140, 198, 62, 0.55), rgba(140, 198, 62, 0.55)), url("../imgs/content/belmont_theater.PNG");
-        background-size: 100% auto; }
+        background-size: 100% auto;
+        background-position: center; }
       #welcome aside button:nth-of-type(2) {
         background: linear-gradient(rgba(89, 74, 65, 0.55), rgba(89, 74, 65, 0.55)), url("../imgs/content/kingontheave.jpg");
-        background-size: 100% auto; }
+        background-size: 100% auto;
+        background-position: center; }
       #welcome aside button:nth-of-type(3) {
         background: linear-gradient(rgba(217, 27, 91, 0.55), rgba(217, 27, 91, 0.55)), url("../imgs/content/Infrastructure image.jpg");
         background-size: 100% auto;
-        background-position: bottom; }
+        background-position: center; }
       #welcome aside button:nth-of-type(4) {
         background: linear-gradient(rgba(251, 175, 63, 0.55), rgba(251, 175, 63, 0.55)), url("../imgs/content/hawthorne hall 1908.jpg");
         background-size: 100% auto;
@@ -349,21 +353,21 @@ hr {
 
 #explore-btn, #tour-btn {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  color: #cbe5a8;
+  color: #a3d265;
   border: 2px solid #ffffff;
   background-color: #ffffff;
   transition: all 0.25s ease-in-out;
   padding: 10px 30px;
-  font-size: 13px;
+  font-size: 15px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase; }
   #explore-btn:link, #tour-btn:link {
     background-color: #ffffff;
     border-color: #ffffff;
-    color: #cbe5a8; }
+    color: #a3d265; }
   #explore-btn:hover, #tour-btn:hover {
-    background-color: #cbe5a8;
+    background-color: #a3d265;
     border-color: #ffffff;
     color: #ffffff;
     fill: #ffffff;
@@ -372,7 +376,7 @@ hr {
     fill: #ffffff;
     left: 5px; }
   #explore-btn:active, #tour-btn:active {
-    background-color: #cbe5a8;
+    background-color: #a3d265;
     border-color: #ffffff;
     color: #ffffff;
     box-shadow: none; }
@@ -380,15 +384,15 @@ hr {
     fill: #ffffff;
     left: 5px; }
   #explore-btn:focus, #explore-btn:active:focus, #tour-btn:focus, #tour-btn:active:focus {
-    background-color: #cbe5a8;
+    background-color: #a3d265;
     border-color: #ffffff;
     color: #ffffff;
-    outline: 5px auto #cbe5a8; }
+    outline: 5px auto #a3d265; }
   #explore-btn:focus, #explore-btn:active:focus svg, #tour-btn:focus, #tour-btn:active:focus svg {
     fill: #ffffff;
     left: 5px; }
   #explore-btn:visited, #tour-btn:visited {
-    background-color: #cbe5a8;
+    background-color: #a3d265;
     border-color: #ffffff; }
 
 /*# sourceMappingURL=main.css.map */

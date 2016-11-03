@@ -30,12 +30,15 @@
 		flex-direction: column;
 		background-color: #ffffff;
 		button {
-			margin: 10px;
+			margin: 15px 15px 0px 15px;
 			height: 25%;
 			color: #ffffff;
 			border: none;
 			padding: 15px;
 			transition: $transition;
+			&:last-of-type {
+				margin: 15px;
+			}
 			.flex-fix { // button elements can't be flex containers in Firefox (flexbug #9)
 				display: flex;
 		    	flex-direction: column;
@@ -49,24 +52,26 @@
 				text-align: left;
 			}
 			h2 {
-				font-size: 2em;
+				font-size: 2.2em;
 				margin: 0px;
-				width: 75%;
+				width: 80%;
 				text-align: left
 			}
 			&:nth-of-type(1) {
 				background: linear-gradient(rgba(140,198,62, 0.55), rgba(140,198,62, 0.55)), url('../imgs/content/belmont_theater.PNG');
 				background-size: 100% auto;
+				background-position: center;
 			}
 			&:nth-of-type(2) {
 				background: linear-gradient(rgba(89,74,65, 0.55), rgba(89,74,65, 0.55)), url('../imgs/content/kingontheave.jpg');
 				background-size: 100% auto;
+				background-position: center;
 
 			}
 			&:nth-of-type(3) {
 				background: linear-gradient(rgba(217,27,91, 0.55), rgba(217,27,91, 0.55)), url('../imgs/content/Infrastructure image.jpg');
 				background-size: 100% auto;
-				background-position: bottom;
+				background-position: center;
 			}
 			&:nth-of-type(4) {
 				background: linear-gradient(rgba(251,175,63, 0.55), rgba(251,175,63, 0.55)), url('../imgs/content/hawthorne hall 1908.jpg');
@@ -95,9 +100,9 @@
 }
 
 #explore-btn, #tour-btn {
-	@include big-button($light-green, #ffffff);
+	@include big-button($medium-green, #ffffff);
 	padding: 10px 30px;
-	font-size: 13px;
+	font-size: 15px;
 	font-family: $open-sans;
 	font-weight: 700;
 	text-transform: uppercase;
