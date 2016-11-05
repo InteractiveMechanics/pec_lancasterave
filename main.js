@@ -48,8 +48,8 @@ map.addLayer(era1Group).addLayer(era2Group).addLayer(era3Group).addLayer(era4Gro
 
 var customControlTimeline = L.Control.extend({options: {position: 'bottomright'},
     onAdd: function (map) {
-        var container = L.DomUtil.create('div', 'timeline-wrapper');
-        container.innerHTML = '<button id="era-all">View All</button><button id="era-1">1600-1699</button><button id="era-2">1700-1749</button><button id="era-3">1750-1799</button><button id="era-4">1800-1849</button><button id="era-5">1850-1899</button><button id="era-6">1900-1919</button><button id="era-7">1920-1939</button><button id="era-8">1940-1959</button><button id="era-9">1960-1979</button><button id="era-10">1980-1999</button><button id="era-11">2000+</button>';
+        var container = L.DomUtil.create('div', 'timeline-container');
+        container.innerHTML = '<div class="timeline-wrapper"><button id="era-all">View All</button><button id="era-1" data-era-width="1">1600-1699</button><button id="era-2" data-era-width="2">1700-1749</button><button id="era-3" data-era-width="2">1750-1799</button><button id="era-4" data-era-width="2">1800-1849</button><button id="era-5" data-era-width="2">1850-1899</button><button id="era-6" data-era-width="3">1900-1919</button><button id="era-7" data-era-width="3">1920-1939</button><button id="era-8" data-era-width="3">1940-1959</button><button id="era-9" data-era-width="3">1960-1979</button><button id="era-10" data-era-width="3">1980-1999</button><button id="era-11" data-era-width="3">2000+</button></div>';
         return container;
     }
 
