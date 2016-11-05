@@ -272,13 +272,15 @@ var dataSuccess = function(data) {
 
 
         	var clearPopup = function() {
-        		$('#popup').html('');
+        		if ($('#popup').hasClass('visible')) {
+	        		$('#popup').addClass('hidden').removeClass('visible');
+        		}
         	}
 
 
             
         	layer.on('click', function (e) {
-            	//clearPopup();
+            	clearPopup();
             	var $popup = $('#popup');
             	var $category = featureData.properties.category;
                 $('.leaflet-marker-icon').css('opacity', '0.7');
@@ -330,8 +332,7 @@ var dataSuccess = function(data) {
 					
 
 
-           		}
-
+           		} 
         	});
 
 	        $( ".close" ).click(function() {
@@ -354,23 +355,10 @@ var dataSuccess = function(data) {
 
 $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
 
+// Popup Function
 
 
 
-// Image Function
-
-
-
-// var getImageUrl = function(id) {
-//     $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/'+ id, function(data) {
-//         //console.log(data.guid.rendered);
-//         if (data.guid) {
-//         return data.guid.rendered;
-//         } else {
-//         return 'https://images3.alphacoders.com/274/274725.jpg';
-//         }
-//     }); 
-// } 
 
 
 // Map Btn Functions - Except Timeline
