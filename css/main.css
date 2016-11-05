@@ -274,12 +274,13 @@ hr {
     margin: 0px 4px;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     color: #b7b7b7;
+    font-size: 1.1em;
     font-weight: 700;
     text-align: left;
     text-transform: uppercase;
     padding: 5px 0px 0px;
     cursor: pointer;
-    width: 10%;
+    width: 13%;
     transition: all 0.25s ease-in-out; }
     .timeline-wrapper button:hover {
       color: #8cc63e;

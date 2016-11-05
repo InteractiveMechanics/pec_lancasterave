@@ -184,12 +184,13 @@
 		margin: 0px 4px;
 		font-family: $open-sans;
 		color: #b7b7b7;
+		font-size: 1.1em;
 		font-weight: 700;
 		text-align: left;
 		text-transform: uppercase;
 		padding: 5px 0px 0px;
 		cursor: pointer;
-		width: 10%;
+		width: 13%;
 		transition: $transition;
 		&:hover {
 			color: $green;
