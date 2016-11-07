@@ -20,8 +20,21 @@
 		p {
 			font-size: 1em;
 			width: 60%;
-			padding-bottom: 30px;
 			line-height: 1.8;
+			&:last-of-type {
+				margin-bottom: 30px;
+			}
+			> a {
+				color: initial;
+				text-decoration: none;
+				border-bottom: 1px dotted black;
+				transition: $transition;
+				&:hover, &:active, &:focus, &:visited {
+					color: lighten(#000000, 15%);
+					text-decoration: none;
+					border-bottom: 1px dotted lighten(#000000, 15%);
+				}
+			}
 		}
 	}
 	aside {

@@ -316,8 +316,18 @@ hr {
     #welcome article p {
       font-size: 1em;
       width: 60%;
-      padding-bottom: 30px;
       line-height: 1.8; }
+      #welcome article p:last-of-type {
+        margin-bottom: 30px; }
+      #welcome article p > a {
+        color: initial;
+        text-decoration: none;
+        border-bottom: 1px dotted black;
+        transition: all 0.25s ease-in-out; }
+        #welcome article p > a:hover, #welcome article p > a:active, #welcome article p > a:focus, #welcome article p > a:visited {
+          color: #262626;
+          text-decoration: none;
+          border-bottom: 1px dotted #262626; }
   #welcome aside {
     width: 33%;
     display: flex;
