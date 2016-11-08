@@ -24,6 +24,12 @@ var boundingGroup = new L.featureGroup([]);
 map.addLayer(boundingGroup);
 
 
+// Tour FeatureGroup 
+var tourGroup = new L.featureGroup([]);
+
+map.addLayer(tourGroup);
+
+
 // Timeline Layers
 
 var era1Group = new L.layerGroup([]);
@@ -85,6 +91,65 @@ map.addControl(new customControlLogo());
 
 // Add Data to Map
 
+var tourStopsArray = [];
+var tourIntro = "";
+var tourConclusion = "";
+
+$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/test', function(data) {
+	$.each(data, function(index, value){
+		 
+		var rawTourStops = value.tour_stops;
+		console.log("Tour Stops is a " + typeof rawTourStops);
+		console.log(rawTourStops);
+		
+		var removeCurlyBraces = rawTourStops.replace(/[{}]/g, "");
+            
+            function extractText( str ){
+                var ret = "";
+
+                if ( /"/.test( str ) ){
+                    ret = str.match( /"(.*?)"/g );
+                } else {
+                    ret = str;
+                }
+                return ret;
+            }
+
+        var obj = extractText(removeCurlyBraces);
+        tourStopsArray = Object.keys(obj).map(function (key) { return parseInt(obj[key].replace(/['"]+/g, ''));});
+        console.log(tourStopsArray);
+        console.log("each item in tourStopaArray is a " + typeof tourStopsArray[0]);
+        
+        
+        tourIntro = value.introduction;
+        tourConclusion = value.Conclusion;
+               
+	});	
+});
+
+console.log('this is tour intro ' + tourIntro);
+
+
+// Helper functions
+
+var emptyIf = function(emptyEl, hideThis) {
+	if( !$.trim( $(emptyEl).html() ).length ) {
+		$(hideThis).addClass('hidden');
+	} else {
+		$(hideThis).removeClass('hidden');
+	}
+}
+
+
+var clearPopup = function() {
+     if ($('#popup').hasClass('visible')) {
+	    $('#popup').addClass('hidden').removeClass('visible');
+    }
+}
+
+
+// End helper functions, begin heavy lifting data stuff
+
 var jsonData = { "type": "FeatureCollection", "features": [] };
 var dataSuccess = function(data) {
 
@@ -117,6 +182,7 @@ var dataSuccess = function(data) {
             dataToAdd["geometry"]["coordinates"] = [value.longitude, value.latitude]
 
             dataToAdd["properties"] = {};
+            dataToAdd["properties"]["ID"] = value.ID;
             dataToAdd["properties"]["title"] = value.post_title;
             dataToAdd["properties"]["description"] = value.post_content;
             dataToAdd["properties"]["sourceTitle"] = value.source_title;
@@ -142,6 +208,8 @@ var dataSuccess = function(data) {
                     }
                 });
             }
+                      
+            
         }
     });
 
@@ -215,6 +283,7 @@ var dataSuccess = function(data) {
         //layer.bindPopup(feature.properties.GPSUserName);
 
             $era = (featureData.properties.era);
+ 
             
             boundingGroup.addLayer(layer);
         	
@@ -227,6 +296,19 @@ var dataSuccess = function(data) {
         	} else if (featureData.properties.category == 'infrastructure') {
         		infrastructureGroup.addLayer(layer);
         	}
+        	
+        	
+        	for (var i = 0; i < tourStopsArray.length; i++) {
+	        	if (featureData.properties.ID == tourStopsArray[i]) {
+		        	tourGroup.addLayer(layer);
+		        	console.log('ID ' + featureData.properties.ID + ", " + featureData.properties.title + ", was added to the tourGroup");
+	        	} 
+        	}
+        	
+        	
+        
+    
+        	
 
             for (var i = 0; i < $era.length; i++) {
 	            // double quotes inside single quotes are intentional - do not remove
@@ -268,14 +350,18 @@ var dataSuccess = function(data) {
                 }
 
             }
+            
+           
 
 
 
+/*
         	var clearPopup = function() {
         		if ($('#popup').hasClass('visible')) {
 	        		$('#popup').addClass('hidden').removeClass('visible');
         		}
         	}
+*/
 
 
             
@@ -318,14 +404,6 @@ var dataSuccess = function(data) {
             			$('#address').css({'color': '#d91b5b'})
             		}
             		
-            		
-					var emptyIf = function(emptyEl, hideThis) {
-						if( !$.trim( $(emptyEl).html() ).length ) {
-						$(hideThis).addClass('hidden');
-						} else {
-						$(hideThis).removeClass('hidden');
-						}
-					}
 					emptyIf('#attr', '#image-from');
 					emptyIf('#sourceTitle', '#info-from');
 					emptyIf('#resourceTitle', '#more-details');
@@ -354,8 +432,38 @@ var dataSuccess = function(data) {
 
 
 $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
+/*
+$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/test', function(data) {
+	$.each(data, function(index, value){
+		 
+		var rawTourStops = value.tour_stops;
+		console.log("Tour Stops is a " + typeof rawTourStops);
+		console.log(rawTourStops);
+		
+		var removeCurlyBraces = rawTourStops.replace(/[{}]/g, "");
+            
+            function extractText( str ){
+                var ret = "";
 
-// Popup Function
+                if ( /"/.test( str ) ){
+                    ret = str.match( /"(.*?)"/g );
+                } else {
+                    ret = str;
+                }
+                return ret;
+            }
+
+        var obj = extractText(removeCurlyBraces);
+        tourStopsArray = Object.keys(obj).map(function (key) { return parseInt(obj[key].replace(/['"]+/g, ''));});
+        console.log(tourStopsArray);
+        console.log("each item in tourStopaArray is a " + typeof tourStopsArray[0]);
+        
+               
+	});	
+});
+*/
+
+
 
 
 
@@ -480,6 +588,16 @@ $(document).ready(showWelcome);
 
 $('#explore-btn').click(function() {
     hideWelcome();
+    map.removeLayer(allerasGroup);
+	map.addLayer(allCategoriesGroup);
+	map.addLayer(allerasGroup);
+	map.fitBounds(boundingGroup.getBounds());
+	clearPopup();
+	$('.categories-wrapper').removeClass('hidden');
+	$('.timeline-container').removeClass('hidden');
+	$('.leaflet-control-zoom').removeClass('hidden');
+
+	
 });
 
 
@@ -552,7 +670,44 @@ $('#development-btn').click(function() {
     $('.filter-development').addClass('active');
 })
 
+// Tour functions
 
+var setupTourIntro = function() {
+	clearPopup();
+	var $popup = $('#popup')
+		$($popup).removeClass('hidden').addClass('visible');
+		$('#popup-template').appendTo($popup);
+		$('#title').html('New Freedom Tour');
+        $('#description').html(tourIntro);
+        $('hr').addClass('hidden');
+        console.log('this is tourIntro: ' + tourIntro);
+        emptyIf('#attr', '#image-from');
+		emptyIf('#sourceTitle', '#info-from');
+		emptyIf('#resourceTitle', '#more-details');	
+		$('#tour-pagination').removeClass('hidden');
+		
+}
+
+
+
+$('#tour-btn').click(function() {
+	hideWelcome();
+	if(map.hasLayer(tourGroup)) {
+		//console.log(tourGroup.getLayers().length);
+		map.removeLayer(tourGroup);
+		map.removeLayer(allerasGroup);
+		map.addLayer(tourGroup);
+		$('.categories-wrapper').addClass('hidden');
+		$('.timeline-container').addClass('hidden');
+		$('.leaflet-control-zoom').addClass('hidden');
+		setupTourIntro();
+		map.fitBounds(tourGroup.getBounds());
+
+		
+		
+	}
+	
+});
 
 
 

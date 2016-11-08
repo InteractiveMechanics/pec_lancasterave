@@ -4,6 +4,7 @@
 	position: absolute;
 	top: 20px;
 	left: 20px;
+	width: 30vw;
 	z-index: 9999;
 	background-color: rgba(250,250,250,0.85);
 	padding: 10px;
@@ -16,7 +17,7 @@
 #popup-template {
 	position: relative;
 	height: 73vh;
-	width: 30vw;
+	//width: 30vw;
 	padding: 15px;
 }
 
@@ -99,5 +100,41 @@
 		width: 12px;
 	}
 
+
+}
+
+
+#tour-pagination {
+	position: absolute;
+	bottom: -70px;
+	width: calc(30vw + 20px);
+	margin-left: -10px;
+	background-color: #ffffff;
+	webkit-box-shadow: 0px 2px 5px 1px rgba(204,204,204,1);
+	-moz-box-shadow: 0px 2px 5px 1px rgba(204,204,204,1);
+	box-shadow: 0px 2px 5px 1px rgba(204,204,204,1);
+
+	button {
+		width: 49%;
+		text-transform: uppercase;
+		padding: 20px 10px;
+		background-color: #ffffff;
+		border: none;
+		font-family: $open-sans;
+		font-size: 0.85em;
+		font-weight: 700;
+		color: $medium-green;
+		transition: $transition;
+		&:first-of-type {
+			text-align: left;
+		}
+		&:last-of-type {
+			text-align: right;
+		}
+		&:hover, &:active, &:focus {
+			background-color: $medium-green;
+			color: #ffffff;
+		}
+	}
 }
 
