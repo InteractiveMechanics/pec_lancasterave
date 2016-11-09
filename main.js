@@ -89,11 +89,62 @@ var customControlLogo = L.Control.extend({options: {position: 'topright'},
 
 map.addControl(new customControlLogo());
 
-// Add Data to Map
+// global variables
 
 var tourStopsArray = [];
 var tourIntro = "";
 var tourConclusion = "";
+var showPopup = function(featureData) {
+	
+	clearPopup();
+    var $popup = $('#popup');
+    var $category = featureData.properties.category;
+    if ($popup.hasClass('hidden')) {
+
+
+                   
+            		$popup.removeClass('hidden').addClass('visible');
+            		$('#popup-template').appendTo($popup);
+            		$('#title').html(featureData.properties.title);
+            		$('#img').attr('src', featureData.properties.img);
+            		$('#img').attr('alt', featureData.properties.caption);
+            		$('#address').html(featureData.properties.presentAddress);
+            		$('#caption').html(featureData.properties.caption);
+            		$('#attr').html(featureData.properties.attr);
+            		$('#attrUrl').attr('href', featureData.properties.attrUrl);
+            		$('#description').html(featureData.properties.description);
+            		$('#sourceUrl').attr('href', featureData.properties.sourceUrl);
+            		$('#sourceTitle').html(featureData.properties.sourceTitle);
+            		$('#resourceTitle').html(featureData.properties.resourceTitle);
+            		$('#resourceUrl').attr('href', featureData.properties.resourceUrl);
+                    $('#era').html(featureData.properties.era);
+            		if ($category == 'civilrights') {
+            			$('#icon').attr('src', 'imgs/icons/icon-civilrights.svg')
+            			$('#address').css({'color': '#594a41'});
+            		} else if ($category == 'arts') {
+            			$('#icon').attr('src', 'imgs/icons/icon-arts.svg');
+            			$('#address').css({'color': '#1b75bb'});
+            		} else if ($category == 'development') {
+            			$('#icon').attr('src', 'imgs/icons/icon-development.svg');
+            			$('#address').css({'color': '#fbaf3f'});
+            		} else if ($category == 'infrastructure') {
+            			$('#icon').attr('src', 'imgs/icons/icon-infrastructure.svg');
+            			$('#address').css({'color': '#d91b5b'})
+            		}
+            		
+					emptyIf('#attr', '#image-from');
+					emptyIf('#sourceTitle', '#info-from');
+					emptyIf('#resourceTitle', '#more-details');
+					
+
+
+           		} 
+
+	
+}
+
+
+// Add Data to Map
 
 $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/test', function(data) {
 	$.each(data, function(index, value){
@@ -122,12 +173,11 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
         
         
         tourIntro = value.introduction;
-        tourConclusion = value.Conclusion;
+        tourConclusion = value.conclusion;
                
 	});	
 });
 
-console.log('this is tour intro ' + tourIntro);
 
 
 // Helper functions
@@ -145,6 +195,22 @@ var clearPopup = function() {
      if ($('#popup').hasClass('visible')) {
 	    $('#popup').addClass('hidden').removeClass('visible');
     }
+}
+
+var resetPopup = function() {
+	$('#title').html("");
+    $('#img').attr('src', "");
+    $('#img').attr('alt', "");
+    $('#address').html("");
+    $('#caption').html("");
+    $('#attr').html("");
+    $('#attrUrl').attr('href', "");
+    $('#description').html("");
+    $('#sourceUrl').attr('href', "");
+    $('#sourceTitle').html("");
+    $('#resourceTitle').html("");
+    $('#resourceUrl').attr('href', "");
+    $('#icon').attr('src', '');
 }
 
 
@@ -353,65 +419,16 @@ var dataSuccess = function(data) {
             
            
 
+				
 
 
-/*
-        	var clearPopup = function() {
-        		if ($('#popup').hasClass('visible')) {
-	        		$('#popup').addClass('hidden').removeClass('visible');
-        		}
-        	}
-*/
-
-
-            
-        	layer.on('click', function (e) {
-            	clearPopup();
-            	var $popup = $('#popup');
-            	var $category = featureData.properties.category;
-                $('.leaflet-marker-icon').css('opacity', '0.7');
-                layer.setOpacity(1.0);
-            	if ($popup.hasClass('hidden')) {
-
-
-                   
-            		$popup.removeClass('hidden').addClass('visible');
-            		$('#popup-template').appendTo($popup);
-            		$('#title').html(featureData.properties.title);
-            		$('#img').attr('src', featureData.properties.img);
-            		$('#img').attr('alt', featureData.properties.caption);
-            		$('#address').html(featureData.properties.presentAddress);
-            		$('#caption').html(featureData.properties.caption);
-            		$('#attr').html(featureData.properties.attr);
-            		$('#attrUrl').attr('href', featureData.properties.attrUrl);
-            		$('#description').html(featureData.properties.description);
-            		$('#sourceUrl').attr('href', featureData.properties.sourceUrl);
-            		$('#sourceTitle').html(featureData.properties.sourceTitle);
-            		$('#resourceTitle').html(featureData.properties.resourceTitle);
-            		$('#resourceUrl').attr('href', featureData.properties.resourceUrl);
-                    $('#era').html(featureData.properties.era);
-            		if ($category == 'civilrights') {
-            			$('#icon').attr('src', 'imgs/icons/icon-civilrights.svg')
-            			$('#address').css({'color': '#594a41'});
-            		} else if ($category == 'arts') {
-            			$('#icon').attr('src', 'imgs/icons/icon-arts.svg');
-            			$('#address').css({'color': '#1b75bb'});
-            		} else if ($category == 'development') {
-            			$('#icon').attr('src', 'imgs/icons/icon-development.svg');
-            			$('#address').css({'color': '#fbaf3f'});
-            		} else if ($category == 'infrastructure') {
-            			$('#icon').attr('src', 'imgs/icons/icon-infrastructure.svg');
-            			$('#address').css({'color': '#d91b5b'})
-            		}
-            		
-					emptyIf('#attr', '#image-from');
-					emptyIf('#sourceTitle', '#info-from');
-					emptyIf('#resourceTitle', '#more-details');
-					
-
-
-           		} 
-        	});
+           
+        	layer.on('click', function(e) {
+	        	  $('.leaflet-marker-icon').css('opacity', '0.7');
+				  layer.setOpacity(1.0);
+				  console.log(featureData);
+				  showPopup(featureData);
+	        });
 
 	        $( ".close" ).click(function() {
 			  $('#popup').addClass('hidden').removeClass('visible');
@@ -432,38 +449,6 @@ var dataSuccess = function(data) {
 
 
 $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
-/*
-$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/test', function(data) {
-	$.each(data, function(index, value){
-		 
-		var rawTourStops = value.tour_stops;
-		console.log("Tour Stops is a " + typeof rawTourStops);
-		console.log(rawTourStops);
-		
-		var removeCurlyBraces = rawTourStops.replace(/[{}]/g, "");
-            
-            function extractText( str ){
-                var ret = "";
-
-                if ( /"/.test( str ) ){
-                    ret = str.match( /"(.*?)"/g );
-                } else {
-                    ret = str;
-                }
-                return ret;
-            }
-
-        var obj = extractText(removeCurlyBraces);
-        tourStopsArray = Object.keys(obj).map(function (key) { return parseInt(obj[key].replace(/['"]+/g, ''));});
-        console.log(tourStopsArray);
-        console.log("each item in tourStopaArray is a " + typeof tourStopsArray[0]);
-        
-               
-	});	
-});
-*/
-
-
 
 
 
@@ -596,6 +581,7 @@ $('#explore-btn').click(function() {
 	$('.categories-wrapper').removeClass('hidden');
 	$('.timeline-container').removeClass('hidden');
 	$('.leaflet-control-zoom').removeClass('hidden');
+	$('hr').removeClass('hidden');
 
 	
 });
@@ -672,26 +658,27 @@ $('#development-btn').click(function() {
 
 // Tour functions
 
-var setupTourIntro = function() {
+var setupTourIntroExit = function(text) {
 	clearPopup();
-	var $popup = $('#popup')
-		$($popup).removeClass('hidden').addClass('visible');
-		$('#popup-template').appendTo($popup);
-		$('#title').html('New Freedom Tour');
-        $('#description').html(tourIntro);
-        $('hr').addClass('hidden');
-        console.log('this is tourIntro: ' + tourIntro);
-        emptyIf('#attr', '#image-from');
-		emptyIf('#sourceTitle', '#info-from');
-		emptyIf('#resourceTitle', '#more-details');	
-		$('#tour-pagination').removeClass('hidden');
-		
+	var $popup = $('#popup');
+	$($popup).removeClass('hidden').addClass('visible');
+	$('#popup-template').appendTo($popup);
+	$('#title').html('New Freedom Tour');
+    $('#description').html(text);
+    $('hr').addClass('hidden');
+    emptyIf('#attr', '#image-from');
+	emptyIf('#sourceTitle', '#info-from');
+	emptyIf('#resourceTitle', '#more-details');	
+	$('#tour-pagination').removeClass('hidden');
 }
+
+
 
 
 
 $('#tour-btn').click(function() {
 	hideWelcome();
+	resetPopup();
 	if(map.hasLayer(tourGroup)) {
 		//console.log(tourGroup.getLayers().length);
 		map.removeLayer(tourGroup);
@@ -700,8 +687,9 @@ $('#tour-btn').click(function() {
 		$('.categories-wrapper').addClass('hidden');
 		$('.timeline-container').addClass('hidden');
 		$('.leaflet-control-zoom').addClass('hidden');
-		setupTourIntro();
+		setupTourIntroExit(tourIntro);
 		map.fitBounds(tourGroup.getBounds());
+		
 
 		
 		
@@ -709,6 +697,55 @@ $('#tour-btn').click(function() {
 	
 });
 
+var tourStopId = -1;
+
+$('#next-stop').click(function() {
+	
+	tourStopId = tourStopId + 1;	
+	var tourId = tourStopsArray[tourStopId];
+		
+	if (tourStopId == tourStopsArray.length) {
+		resetPopup();
+		setupTourIntroExit(tourConclusion);
+	} else if (tourStopId > tourStopsArray.length) {
+		map.addLayer(allCategoriesGroup);
+		map.addLayer(allerasGroup);
+	} else {
+		for (i=0; i < jsonData.features.length; i++){
+			if (jsonData.features[i].properties.ID == tourId) {
+				resetPopup();
+				showPopup(jsonData.features[i]);
+				console.log(tourStopId);
+				console.log(tourStopsArray.length);			
+			}
+			 
+		}
+		
+	}	
+});
+
+
+$('#prev-stop').click(function() {
+	
+	tourStopId = tourStopId - 1;	
+	var tourId = tourStopsArray[tourStopId];
+	
+	if (tourStopId == -1) {
+		resetPopup();
+		setupTourIntroExit(tourIntro);
+		// TO DO: disable prev button
+	} else {
+		for (i=0; i < jsonData.features.length; i++){
+			if (jsonData.features[i].properties.ID == tourId) {
+				resetPopup();
+				showPopup(jsonData.features[i]);
+				console.log(tourStopId);		
+			}
+			 
+		}
+
+	}		
+});
 
 
 
