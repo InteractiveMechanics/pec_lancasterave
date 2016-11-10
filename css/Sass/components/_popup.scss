@@ -115,7 +115,7 @@
 	box-shadow: 0px 2px 5px 1px rgba(204,204,204,1);
 
 	button {
-		width: 49%;
+		width: 49.5%;
 		text-transform: uppercase;
 		padding: 20px 10px;
 		background-color: #ffffff;
@@ -134,6 +134,7 @@
 		&:hover, &:active, &:focus {
 			background-color: $medium-green;
 			color: #ffffff;
+			outline: $medium-green;
 		}
 	}
 }

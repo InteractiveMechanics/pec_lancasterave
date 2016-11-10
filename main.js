@@ -562,6 +562,11 @@ var showWelcome = function() {
     if ($welcome.hasClass('hidden')) {
         $welcome.removeClass('hidden');
     }
+    map.removeLayer(allerasGroup);
+	map.addLayer(allCategoriesGroup);
+	map.addLayer(allerasGroup);
+	map.fitBounds(boundingGroup.getBounds());
+	clearPopup();    
 }
 
 var hideWelcome = function() {
@@ -571,19 +576,46 @@ var hideWelcome = function() {
 
 $(document).ready(showWelcome);
 
-$('#explore-btn').click(function() {
-    hideWelcome();
+
+var showFullMap = function() {
+	hideWelcome();
     map.removeLayer(allerasGroup);
 	map.addLayer(allCategoriesGroup);
 	map.addLayer(allerasGroup);
 	map.fitBounds(boundingGroup.getBounds());
 	clearPopup();
+	restorePopupStyles();
+	if ($('.timeline-wrapper button').hasClass('active')) {
+        $('.timeline-wrapper button').removeClass('active');  
+    } 
 	$('.categories-wrapper').removeClass('hidden');
 	$('.timeline-container').removeClass('hidden');
 	$('.leaflet-control-zoom').removeClass('hidden');
-	$('hr').removeClass('hidden');
-
+	$('.close').removeClass('hidden');
+	$('#tour-pagination').addClass('hidden');
+	$('.filter-civilrights').addClass('active');
+	$('.filter-infrastructure').addClass('active');
+	$('.filter-development').addClass('active');
+	$('.filter-arts').addClass('active');
 	
+}
+
+var showMapLite = function() {
+	hideWelcome();
+	restorePopupStyles();
+	if ($('.timeline-wrapper button').hasClass('active')) {
+        $('.timeline-wrapper button').removeClass('active');  
+    } 
+    $('#tour-pagination').addClass('hidden');
+	$('.categories-wrapper').removeClass('hidden');
+	$('.timeline-container').removeClass('hidden');
+	$('.leaflet-control-zoom').removeClass('hidden');
+	$('.close').removeClass('hidden');
+}
+
+
+$('#explore-btn').click(function() {
+   showFullMap();
 });
 
 
@@ -619,7 +651,8 @@ var removeArts = function() {
 
 
 $('#arts-btn').click(function() {
-    hideWelcome();
+    //hideWelcome();
+	showMapLite();
     removeCivilRights();      
     removeInfrastructure();
     removeDevelopment();
@@ -629,7 +662,8 @@ $('#arts-btn').click(function() {
 
 
 $('#civilrights-btn').click(function() {
-    hideWelcome();
+    //hideWelcome();
+    showMapLite();
 	removeArts();
     removeInfrastructure();
     removeDevelopment();
@@ -639,7 +673,8 @@ $('#civilrights-btn').click(function() {
 })
 
 $('#infrastructure-btn').click(function() {
-    hideWelcome();
+    //hideWelcome();
+    showMapLite();
     removeCivilRights();
     removeArts();
     removeDevelopment();
@@ -648,7 +683,8 @@ $('#infrastructure-btn').click(function() {
 })
 
 $('#development-btn').click(function() {
-    hideWelcome();
+    //hideWelcome();
+    showMapLite();
     removeCivilRights();
 	removeInfrastructure();
     removeArts();
@@ -670,9 +706,19 @@ var setupTourIntroExit = function(text) {
 	emptyIf('#sourceTitle', '#info-from');
 	emptyIf('#resourceTitle', '#more-details');	
 	$('#tour-pagination').removeClass('hidden');
+	$('.caption-wrapper').css('display', 'none');
+	$('#img').css('display', 'none');
+	$('#icon').attr('src', 'imgs/icons/icon-tour.svg');
+	$('#address').html('New Freedom Tour').css('color', '#8DC63F');
 }
 
 
+
+var restorePopupStyles = function() {
+	$('hr').removeClass('hidden');
+	$('.caption-wrapper').css('display', 'initial');
+	$('#img').css('display', 'initial');
+}
 
 
 
@@ -687,8 +733,12 @@ $('#tour-btn').click(function() {
 		$('.categories-wrapper').addClass('hidden');
 		$('.timeline-container').addClass('hidden');
 		$('.leaflet-control-zoom').addClass('hidden');
+		$('.close').addClass('hidden');
 		setupTourIntroExit(tourIntro);
 		map.fitBounds(tourGroup.getBounds());
+		$('#prev-stop').html('Exit Tour');
+		$('#next-stop').html('Next Stop');
+		tourStopId = -1;
 		
 
 		
@@ -707,13 +757,17 @@ $('#next-stop').click(function() {
 	if (tourStopId == tourStopsArray.length) {
 		resetPopup();
 		setupTourIntroExit(tourConclusion);
+		$('#next-stop').html('');
+		$('#next-stop').html('Exit Tour');
 	} else if (tourStopId > tourStopsArray.length) {
-		map.addLayer(allCategoriesGroup);
-		map.addLayer(allerasGroup);
+		showFullMap();
 	} else {
+		$('#next-stop').html('Next Stop');
+		$('#prev-stop').html('Last Stop');
 		for (i=0; i < jsonData.features.length; i++){
 			if (jsonData.features[i].properties.ID == tourId) {
 				resetPopup();
+				restorePopupStyles();
 				showPopup(jsonData.features[i]);
 				console.log(tourStopId);
 				console.log(tourStopsArray.length);			
@@ -733,17 +787,22 @@ $('#prev-stop').click(function() {
 	if (tourStopId == -1) {
 		resetPopup();
 		setupTourIntroExit(tourIntro);
-		// TO DO: disable prev button
-	} else {
+		$('#prev-stop').html('Exit Tour'); 
+	} else if (tourStopId == -2) {
+		showFullMap();
+	} else if (tourStopId >= 0){
+		$('#next-stop').html('Next Stop');
 		for (i=0; i < jsonData.features.length; i++){
 			if (jsonData.features[i].properties.ID == tourId) {
 				resetPopup();
-				showPopup(jsonData.features[i]);
-				console.log(tourStopId);		
+				restorePopupStyles()
+				showPopup(jsonData.features[i]);		
 			}
 			 
 		}
 
+	} else {
+		showFullMap();
 	}		
 });
 

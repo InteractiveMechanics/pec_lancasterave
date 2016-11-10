@@ -15,7 +15,7 @@
 		width: 67%;
 		padding: 50px;
 		img {
-			width: 165px;
+			width: 275px;
 		}
 		p {
 			font-size: 1em;
@@ -101,6 +101,7 @@
 			}
 			&:hover {
 				background-size: 110% auto;
+				cursor: pointer;
 				transition: $transition;
 			}
 		}
@@ -119,5 +120,10 @@
 	font-family: $open-sans;
 	font-weight: 700;
 	text-transform: uppercase;
+	svg {
+		position: relative;
+		top: 1px;
+		fill: $medium-green;
+	}
 
 }

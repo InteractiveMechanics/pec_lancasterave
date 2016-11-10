@@ -142,7 +142,7 @@ hr {
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
   box-shadow: 0px 2px 5px 1px #cccccc; }
   #tour-pagination button {
-    width: 49%;
+    width: 49.5%;
     text-transform: uppercase;
     padding: 20px 10px;
     background-color: #ffffff;
@@ -158,7 +158,8 @@ hr {
       text-align: right; }
     #tour-pagination button:hover, #tour-pagination button:active, #tour-pagination button:focus {
       background-color: #a3d265;
-      color: #ffffff; }
+      color: #ffffff;
+      outline: #a3d265; }
 
 .leaflet-right .leaflet-control {
   margin-right: 20px;
@@ -340,7 +341,7 @@ hr {
     width: 67%;
     padding: 50px; }
     #welcome article img {
-      width: 165px; }
+      width: 275px; }
     #welcome article p {
       font-size: 1em;
       width: 60%;
@@ -409,6 +410,7 @@ hr {
           fill: #ffffff; }
       #welcome aside button:hover {
         background-size: 110% auto;
+        cursor: pointer;
         transition: all 0.25s ease-in-out; }
 
 #explore-btn {
@@ -436,26 +438,27 @@ hr {
     fill: #ffffff;
     text-decoration: none; }
   #explore-btn:hover svg, #tour-btn:hover svg {
-    fill: #ffffff;
-    left: 5px; }
+    fill: #ffffff; }
   #explore-btn:active, #tour-btn:active {
     background-color: #a3d265;
     border-color: #ffffff;
     color: #ffffff;
     box-shadow: none; }
   #explore-btn:active svg, #tour-btn:active svg {
-    fill: #ffffff;
-    left: 5px; }
+    fill: #ffffff; }
   #explore-btn:focus, #explore-btn:active:focus, #tour-btn:focus, #tour-btn:active:focus {
     background-color: #a3d265;
     border-color: #ffffff;
     color: #ffffff;
     outline: 5px auto #a3d265; }
   #explore-btn:focus, #explore-btn:active:focus svg, #tour-btn:focus, #tour-btn:active:focus svg {
-    fill: #ffffff;
-    left: 5px; }
+    fill: #ffffff; }
   #explore-btn:visited, #tour-btn:visited {
     background-color: #a3d265;
     border-color: #ffffff; }
+  #explore-btn svg, #tour-btn svg {
+    position: relative;
+    top: 1px;
+    fill: #a3d265; }
 
 /*# sourceMappingURL=main.css.map */

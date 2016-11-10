@@ -19,7 +19,7 @@
 	}
 	&:hover svg {
 		fill: $color_2;
-		left: 5px;
+		//left: 5px;
 	}
 	&:active {
 		background-color: $color_1;
@@ -29,7 +29,7 @@
 	}
 	&:active svg {
 		fill: $color_2;
-		left: 5px;
+		//left: 5px;
 	}
 	&:focus, &:active:focus {
 		background-color: $color_1;
@@ -39,7 +39,7 @@
 	}
 	&:focus, &:active:focus svg {
 		fill: $color_2;
-		left: 5px;
+		//left: 5px;
 	}
 	&:visited {
 		background-color: $color_1;
