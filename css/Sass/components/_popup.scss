@@ -12,6 +12,11 @@
 	-webkit-box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
 	-moz-box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
 	box-shadow: -2px 5px 11px 0px rgba(110,110,110,0.62);
+	@include screen-ltmd {
+		right: 20px;
+		bottom: 20px;
+		width: auto;		
+	}
 }
 
 #popup-template {

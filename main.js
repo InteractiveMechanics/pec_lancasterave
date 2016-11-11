@@ -572,6 +572,7 @@ var showWelcome = function() {
 var hideWelcome = function() {
     var $welcome = $('#welcome');
     $welcome.addClass('hidden').removeClass('visible');
+    $("html, body").animate({ scrollTop: 0 });
 }
 
 $(document).ready(showWelcome);

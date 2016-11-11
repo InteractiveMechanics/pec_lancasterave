@@ -154,6 +154,9 @@
 	img {
 		filter: drop-shadow(1px 4px 2px rgba(90, 90, 90, 0.9));
 		width: 275px;
+		@include screen-xs {
+			width: 175px;
+		}
 	}
 	&:hover {
 		img {
