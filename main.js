@@ -63,6 +63,8 @@ var customControlTimeline = L.Control.extend({options: {position: 'bottomright'}
 
 map.addControl(new customControlTimeline);
 
+
+
 var customControlTimelineMobile = L.Control.extend({options: {position: 'bottomright'},
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'timeline-container-mobile');
@@ -75,7 +77,12 @@ var customControlTimelineMobile = L.Control.extend({options: {position: 'bottomr
 map.addControl(new customControlTimelineMobile);
 
 
+
+
 L.control.zoom({position:'bottomright'}).addTo(map);
+
+
+
 
 var customControlCategories = L.Control.extend({options: {position: 'bottomright'}, 
     onAdd: function (map) {
@@ -87,6 +94,22 @@ var customControlCategories = L.Control.extend({options: {position: 'bottomright
 });
 
 map.addControl(new customControlCategories);
+
+
+
+var customControlCategoriesMobile = L.Control.extend({options: {position: 'bottomright'}, 
+    onAdd: function (map) {
+        var container = L.DomUtil.create('div', 'categories-wrapper-mobile');
+        container.innerHTML = '<select class="selectpicker"><option>View All Categories</option><option class="category-filter filter-infrastructure">Infrastructure</option><option class="category-filter filter-development active">Development</option><option class="category-filter filter-civilrights active">Social Movements &amp; Civil Rights</option><option class="category-filter filter-arts active">Arts &amp; Culture</option></select>';
+        return container
+    }
+
+});
+
+map.addControl(new customControlCategoriesMobile);
+
+
+
 
 
 var customControlLogo = L.Control.extend({options: {position: 'topright'},
@@ -507,36 +530,11 @@ $('.filter-infrastructure').click(function() {
 
 
 
-// Timeline functions
+// Timeline functions - mobile
 
 $('.selectpicker').selectpicker();
 
-
-var eraFilterTasks = function(LayerGroup, button) {
-    if ($('.timeline-wrapper button').hasClass('active')) {
-        $('.timeline-wrapper button').removeClass('active');  
-    } 
-    $(button).addClass('active');
-    map.addLayer(allerasGroup);
-    map.removeLayer(allerasGroup);
-    map.addLayer(LayerGroup);
-}
-
-$('#era-all').click(function() {
-    if ($('.timeline-wrapper button').hasClass('active')) {
-        $('.timeline-wrapper button').removeClass('active');  
-    } 
-    $(this).addClass('active');
-    map.addLayer(allerasGroup);
-    map.addLayer(allCategoriesGroup);
-});
-
-$('#era-1').click(function() {
-    eraFilterTasks(era1Group, '#era-1');
-});
-
-
-$('.selectpicker').on('changed.bs.select', function(e) {
+$('#timeline-wrapper').on('changed.bs.select', function(e) {
 	var selected = $(this).find("option:selected").attr("data-era");
 	 map.addLayer(allerasGroup);
 	 map.removeLayer(allerasGroup);
@@ -564,6 +562,31 @@ $('.selectpicker').on('changed.bs.select', function(e) {
 		map.addLayer(allerasGroup);
 	}
 	
+});
+
+
+
+var eraFilterTasks = function(LayerGroup, button) {
+    if ($('.timeline-wrapper button').hasClass('active')) {
+        $('.timeline-wrapper button').removeClass('active');  
+    } 
+    $(button).addClass('active');
+    map.addLayer(allerasGroup);
+    map.removeLayer(allerasGroup);
+    map.addLayer(LayerGroup);
+}
+
+$('#era-all').click(function() {
+    if ($('.timeline-wrapper button').hasClass('active')) {
+        $('.timeline-wrapper button').removeClass('active');  
+    } 
+    $(this).addClass('active');
+    map.addLayer(allerasGroup);
+    map.addLayer(allCategoriesGroup);
+});
+
+$('#era-1').click(function() {
+    eraFilterTasks(era1Group, '#era-1');
 });
 
 $('#era-2').click(function() {

@@ -2,6 +2,11 @@
 .leaflet-right .leaflet-control {
 	margin-right: 20px;
 	margin-bottom: 0px;
+	@include screen-ltmd {
+		&:first-of-type {
+		margin-bottom: 20px;
+		}
+	}
 }
 
 .leaflet-bottom {
@@ -48,6 +53,10 @@
 .leaflet-control-zoom {
 	margin-top: 10px !important;
 	margin-bottom: 10px !important;
+	@include screen-ltmd {
+		display: none;
+	}
+
 }
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
@@ -81,6 +90,9 @@
 }
 
 .categories-wrapper {
+	@include screen-ltmd {
+		display: none;
+	}
 	button {
 		display: block;
 	}
@@ -98,6 +110,13 @@
 			background-position: 217px;
 		}
 
+	}
+}
+
+.categories-wrapper-mobile {
+	margin-bottom: 30px;
+	@include screen-gtsm {
+		display: none;
 	}
 }
 
