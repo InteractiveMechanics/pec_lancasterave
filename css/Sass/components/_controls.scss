@@ -167,6 +167,77 @@
 
 .timeline-container {
 	width: calc(100vw - 40px);
+		@include screen-ltmd {
+		display: none;
+	}
+}
+
+.timeline-container-mobile {
+	@include screen-gtsm {
+		display: none;
+	}
+	width: calc(100vw - 30px);
+	select {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		width: calc(100vw - 30px);
+	    height: 45px;
+	    border: 0px;
+	    border-radius: 0px;
+	    text-transform: uppercase;
+	    font-size: 1.1em;
+	    font-weight: 500; 
+	    padding-left: 15px;
+	    color: $medium-green;
+	    letter-spacing: 1px;
+    }
+}
+
+.bootstrap-select {
+	width: calc(100vw - 30px);
+	button {
+		border: 0px;
+		border-radius: 0px;
+		text-transform: uppercase;
+		font-size: 1.1em;
+		font-weight: 700; 
+		padding-left: 15px;
+	    color: $medium-green;
+	}
+	.dropdown-toggle {
+		width: calc(100vw - 30px);
+		padding: 12px 25px;
+		background-color: #ffffff;
+		color: $medium-green;
+	}
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+	width: initial;
+}
+
+.dropdown-menu>li>a {
+	color: $medium-green;
+	font-weight: 500;
+	&:hover, &:active, &:focus {
+		color: $medium-green;
+	}
+}
+
+.bootstrap-select.btn-group .dropdown-menu {
+	border: none;
+	border-radius: 0px;
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {
+	color: $medium-green;
+	background-color: #ffffff;
+	border: none;
+}
+
+.bootstrap-select .dropdown-toggle:focus {
+	outline: 3px auto $medium-green !important;
 }
 
 .timeline-wrapper {
