@@ -100,7 +100,7 @@ map.addControl(new customControlCategories);
 var customControlCategoriesMobile = L.Control.extend({options: {position: 'bottomright'}, 
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'categories-wrapper-mobile');
-        container.innerHTML = '<select class="selectpicker"><option>View All Categories</option><option class="category-filter filter-infrastructure">Infrastructure</option><option class="category-filter filter-development active">Development</option><option class="category-filter filter-civilrights active">Social Movements &amp; Civil Rights</option><option class="category-filter filter-arts active">Arts &amp; Culture</option></select>';
+        container.innerHTML = '<select class="selectpicker" id="categories-wrapper-mobile"><option data-category="all">View All Categories</option><option class="category-filter filter-infrastructure-mobile" data-category="infrastructure">Infrastructure</option><option class="category-filter filter-development-mobile active" data-category="development">Development</option><option class="category-filter filter-civilrights-mobile active" data-category="civilrights">Social Movements &amp; Civil Rights</option><option class="category-filter filter-arts-mobile active" data-category="arts">Arts &amp; Culture</option></select>';
         return container
     }
 
@@ -511,6 +511,25 @@ $('.logo-btn').click(function() {
     showWelcome();
     $('#welcome').addClass('visible');
 });
+
+$('#categories-wrapper-mobile').on('changed.bs.select', function(e) {
+	var selected = $(this).find("option:selected").attr("data-category");
+	 map.addLayer(allCategoriesGroup);
+	 map.removeLayer(allCategoriesGroup);
+	if (selected == 'arts') {
+		map.addLayer(artsGroup);
+	} else if (selected == 'civilrights') {
+		map.addLayer(civilrightsGroup);
+	} else if (selected == 'infrastructure') {
+		map.addLayer(infrastructureGroup);
+	} else if (selected == 'development') {
+		map.addLayer(developmentGroup);
+	} else {
+		map.addLayer(allCategoriesGroup);
+	}
+	
+});
+
 
 $('.filter-arts').click(function() {
    categoryFilterTasks(artsGroup, '.filter-arts');

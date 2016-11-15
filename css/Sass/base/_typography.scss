@@ -33,3 +33,6 @@ hr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+:focus {
+	outline: $medium-green auto 3px;
+}

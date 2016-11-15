@@ -3,9 +3,7 @@
 	margin-right: 20px;
 	margin-bottom: 0px;
 	@include screen-ltmd {
-		&:first-of-type {
 		margin-bottom: 20px;
-		}
 	}
 }
 
@@ -106,8 +104,12 @@
 			font-size: 1.3em;
 		}
 		.category-filter {
-			width: 250px;
-			background-position: 217px;
+			width: 260px;
+			background-position: 226px;
+			@include screen-md {
+				width: 270px;
+				background-position: 236px;
+			}
 		}
 
 	}
@@ -118,6 +120,33 @@
 	@include screen-gtsm {
 		display: none;
 	}
+	.filter-* {
+		color: $medium-green;
+		background-image: none;
+	}
+	.category-filter {
+		font-family: $open-sans;
+		font-weight: 600;
+		height: initial;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+}
+
+.caret {
+	border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 11px solid $medium-green;
+    border-top: none;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .caret {
+	right: 20px;
+	margin-top: -4px;
+}
+
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+	border-bottom: 11px solid $medium-green;
 }
 
 .titles-wrapper {
@@ -238,7 +267,11 @@
 
 .dropdown-menu>li>a {
 	color: $medium-green;
-	font-weight: 500;
+	font-weight: 600;
+	font-family: $open-sans;
+	padding: 7px 20px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 	&:hover, &:active, &:focus {
 		color: $medium-green;
 	}
