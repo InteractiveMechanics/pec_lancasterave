@@ -3,14 +3,14 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	//height: 100vh;
 	z-index: 9999;
 	display: flex;
 	flex-direction: row;
 	@include screen-ltmd {
 		display: initial;
 	}
-	@include screen-md {
+	@include screen-sm {
 		height: 100vh;
 	}
 	article {
@@ -19,10 +19,12 @@
 		background-size: 100% auto;
 		background-position: bottom;
 		width: 67%;
+		//height: 100vh;
 		padding: 50px;
 		@include screen-ltmd {
 			width: 100%;
 			padding: 50px 0px;
+			background-size: cover;
 			
 		}
 		@include screen-sm {
@@ -39,14 +41,21 @@
 			}
 		}
 		p {
-			font-size: 1em;
+			font-size: 1.17em;
 			width: 60%;
 			line-height: 1.8;
+			@include screen-md {
+				width: 75%;
+			}
 			@include screen-ltmd {
 				margin: 0 auto;
+				width: 80%;
+			}
+			@include screen-sm {
+				font-size: 1.25em;
 			}
 			@include screen-xs {
-				width: 80%;
+				font-size: 1.4em;
 			}
 			&:last-of-type {
 				margin-bottom: 30px;
@@ -69,9 +78,9 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #ffffff;
-		height: 100vh; //for Safari
+		height: 100vh; //for Safari		
 		@include screen-ltmd {
-			display: none;
+		display: none;
 		}
 		button {
 			margin: 15px 15px 0px 15px;
@@ -80,6 +89,7 @@
 			border: none;
 			padding: 15px;
 			transition: $transition;
+			flex: 1;
 			&:last-of-type {
 				margin: 15px;
 			}
@@ -99,7 +109,10 @@
 				font-size: 2.2em;
 				margin: 0px;
 				width: 80%;
-				text-align: left
+				text-align: left;
+				@include screen-md {
+					width: 95%;
+				}
 			}
 			&:nth-of-type(1) {
 				background: linear-gradient(rgba(140,198,62, 0.55), rgba(140,198,62, 0.55)), url('../imgs/content/belmont_theater.PNG');
@@ -158,11 +171,7 @@
 	}
 	@include screen-ltmd {
 		display: block;
-		width: 60%;
+		width: 80%;
 		margin: 0 auto 20px;
 	}
-	@include screen-xs {
-		width: 80%;
-	}
-
 }

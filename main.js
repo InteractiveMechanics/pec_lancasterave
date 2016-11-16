@@ -255,6 +255,8 @@ var resetPopup = function() {
 }
 
 
+
+
 // End helper functions, begin heavy lifting data stuff
 
 var jsonData = { "type": "FeatureCollection", "features": [] };
@@ -687,6 +689,8 @@ var showFullMap = function() {
 	$('.timeline-container').removeClass('hidden');
 	$('.leaflet-control-zoom').removeClass('hidden');
 	$('.close').removeClass('hidden');
+	$('.categories-wrapper-mobile').removeClass('hidden');
+	$('.timeline-container-mobile').removeClass('hidden');
 	$('#tour-pagination').addClass('hidden');
 	$('.filter-civilrights').addClass('active');
 	$('.filter-infrastructure').addClass('active');
@@ -828,6 +832,8 @@ $('#tour-btn').click(function() {
 		$('.categories-wrapper').addClass('hidden');
 		$('.timeline-container').addClass('hidden');
 		$('.leaflet-control-zoom').addClass('hidden');
+		$('.categories-wrapper-mobile').addClass('hidden');
+		$('.timeline-container-mobile').addClass('hidden');
 		$('.close').addClass('hidden');
 		setupTourIntroExit(tourIntro);
 		map.fitBounds(tourGroup.getBounds());

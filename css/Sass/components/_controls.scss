@@ -2,8 +2,8 @@
 .leaflet-right .leaflet-control {
 	margin-right: 20px;
 	margin-bottom: 0px;
-	@include screen-ltmd {
-		margin-bottom: 20px;
+	@include screen-ltlg {
+		margin-bottom: 15px;
 	}
 }
 
@@ -51,7 +51,7 @@
 .leaflet-control-zoom {
 	margin-top: 10px !important;
 	margin-bottom: 10px !important;
-	@include screen-ltmd {
+	@include screen-ltlg {
 		display: none;
 	}
 
@@ -116,7 +116,6 @@
 }
 
 .categories-wrapper-mobile {
-	margin-bottom: 30px;
 	@include screen-gtsm {
 		display: none;
 	}
@@ -132,6 +131,7 @@
 		letter-spacing: 0.5px;
 	}
 }
+
 
 .caret {
 	border-right: 5px solid transparent;
@@ -200,7 +200,7 @@
 	cursor: pointer;
 	transition: $transition;
 	img {
-		filter: drop-shadow(1px 4px 2px rgba(90, 90, 90, 0.9));
+		//filter: drop-shadow(1px 4px 2px rgba(90, 90, 90, 0.9));
 		width: 275px;
 		@include screen-xs {
 			width: 175px;
@@ -240,6 +240,15 @@
 	    color: $medium-green;
 	    letter-spacing: 1px;
     }
+}
+
+.timeline-container-mobile .leaflet-control {
+	@include screen-md {
+		margin-bottom: 10px;
+	}
+	@include screen-sm {
+		margin-bottom: 5px;
+	}
 }
 
 .bootstrap-select {
@@ -303,6 +312,10 @@
 	background-color: #ffffff;
 	box-shadow: -2px 3px 3px 0px rgba(112,112,112,0.54);
 	margin-bottom: 10px !important;
+	@include screen-md {
+		height: 70px;
+		align-items: initial;
+	}
 	button {
 		border: none;
 		background-color: #ffffff;

@@ -1,7 +1,8 @@
 @import "https://fonts.googleapis.com/css?family=Alegreya:400,400i,700,700i|Open+Sans:400,700";
 body {
   margin: 0;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  overflow-y: hidden; }
 
 .hidden {
   visibility: hidden;
@@ -15,7 +16,7 @@ body {
 
 p {
   font-family: "Alegreya", Garamond, serif;
-  font-size: 0.85em; }
+  font-size: 1.15em; }
   p a {
     color: #8cc63e;
     transition: all 0.25s ease-in-out; }
@@ -68,14 +69,19 @@ hr {
   box-shadow: -2px 5px 11px 0px rgba(110, 110, 110, 0.62); }
   @media (max-width: 991px) {
     #popup {
+      background-color: rgba(250, 250, 250, 0.95);
       right: 20px;
-      bottom: 20px;
       width: auto; } }
 
 #popup-template {
   position: relative;
   height: 73vh;
-  padding: 15px; }
+  padding: 15px;
+  /*
+  	@include screen-ltmd {
+  		height: 90vh;	
+  	}
+  */ }
 
 #address {
   letter-spacing: 0.4px;
@@ -124,9 +130,6 @@ hr {
 
 .close {
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   right: -20px;
   top: -21px;
   height: 30px;
@@ -138,19 +141,28 @@ hr {
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
   box-shadow: 0px 2px 5px 1px #cccccc; }
   .close img {
-    width: 12px; }
+    width: 12px;
+    height: 12px; }
+    @media (max-width: 991px) {
+      .close img {
+        position: relative;
+        right: 5px;
+        bottom: 1px; } }
 
 #tour-pagination {
   position: absolute;
   bottom: -70px;
-  width: calc(30vw + 20px);
+  width: 30vw;
   margin-left: -10px;
   background-color: #ffffff;
   webkit-box-shadow: 0px 2px 5px 1px #cccccc;
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
   box-shadow: 0px 2px 5px 1px #cccccc; }
+  @media (max-width: 991px) {
+    #tour-pagination {
+      width: 100%; } }
   #tour-pagination button {
-    width: 49.5%;
+    width: 49%;
     text-transform: uppercase;
     padding: 20px 10px;
     background-color: #ffffff;
@@ -172,9 +184,9 @@ hr {
 .leaflet-right .leaflet-control {
   margin-right: 20px;
   margin-bottom: 0px; }
-  @media (max-width: 991px) {
+  @media (max-width: 1199px) {
     .leaflet-right .leaflet-control {
-      margin-bottom: 20px; } }
+      margin-bottom: 15px; } }
 
 .leaflet-bottom {
   width: 100%; }
@@ -209,7 +221,7 @@ hr {
 .leaflet-control-zoom {
   margin-top: 10px !important;
   margin-bottom: 10px !important; }
-  @media (max-width: 991px) {
+  @media (max-width: 1199px) {
     .leaflet-control-zoom {
       display: none; } }
 
@@ -260,20 +272,18 @@ hr {
           width: 270px;
           background-position: 236px; } }
 
-.categories-wrapper-mobile {
-  margin-bottom: 30px; }
-  @media (min-width: 992px) {
-    .categories-wrapper-mobile {
-      display: none; } }
-  .categories-wrapper-mobile .filter-* {
-    color: #a3d265;
-    background-image: none; }
-  .categories-wrapper-mobile .category-filter {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    height: initial;
-    text-transform: uppercase;
-    letter-spacing: 0.5px; }
+@media (min-width: 992px) {
+  .categories-wrapper-mobile {
+    display: none; } }
+.categories-wrapper-mobile .filter-* {
+  color: #a3d265;
+  background-image: none; }
+.categories-wrapper-mobile .category-filter {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  height: initial;
+  text-transform: uppercase;
+  letter-spacing: 0.5px; }
 
 .caret {
   border-right: 5px solid transparent;
@@ -328,7 +338,6 @@ hr {
   cursor: pointer;
   transition: all 0.25s ease-in-out; }
   .logo-btn img {
-    filter: drop-shadow(1px 4px 2px rgba(90, 90, 90, 0.9));
     width: 275px; }
     @media (max-width: 767px) {
       .logo-btn img {
@@ -361,6 +370,13 @@ hr {
     padding-left: 15px;
     color: #a3d265;
     letter-spacing: 1px; }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .timeline-container-mobile .leaflet-control {
+    margin-bottom: 10px; } }
+@media (min-width: 768px) and (max-width: 991px) {
+  .timeline-container-mobile .leaflet-control {
+    margin-bottom: 5px; } }
 
 .bootstrap-select {
   width: calc(100vw - 30px); }
@@ -412,6 +428,10 @@ hr {
   background-color: #ffffff;
   box-shadow: -2px 3px 3px 0px rgba(112, 112, 112, 0.54);
   margin-bottom: 10px !important; }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .timeline-wrapper {
+      height: 70px;
+      align-items: initial; } }
   .timeline-wrapper button {
     border: none;
     background-color: #ffffff;
@@ -445,14 +465,13 @@ hr {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   z-index: 9999;
   display: flex;
   flex-direction: row; }
   @media (max-width: 991px) {
     #welcome {
       display: initial; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
+  @media (min-width: 768px) and (max-width: 991px) {
     #welcome {
       height: 100vh; } }
   #welcome article {
@@ -465,7 +484,8 @@ hr {
     @media (max-width: 991px) {
       #welcome article {
         width: 100%;
-        padding: 50px 0px; } }
+        padding: 50px 0px;
+        background-size: cover; } }
     @media (min-width: 768px) and (max-width: 991px) {
       #welcome article {
         height: 100%; } }
@@ -479,15 +499,22 @@ hr {
           display: block;
           margin: 0px auto 30px; } }
     #welcome article p {
-      font-size: 1em;
+      font-size: 1.17em;
       width: 60%;
       line-height: 1.8; }
+      @media (min-width: 992px) and (max-width: 1199px) {
+        #welcome article p {
+          width: 75%; } }
       @media (max-width: 991px) {
         #welcome article p {
-          margin: 0 auto; } }
+          margin: 0 auto;
+          width: 80%; } }
+      @media (min-width: 768px) and (max-width: 991px) {
+        #welcome article p {
+          font-size: 1.25em; } }
       @media (max-width: 767px) {
         #welcome article p {
-          width: 80%; } }
+          font-size: 1.4em; } }
       #welcome article p:last-of-type {
         margin-bottom: 30px; }
       #welcome article p > a {
@@ -514,7 +541,8 @@ hr {
       color: #ffffff;
       border: none;
       padding: 15px;
-      transition: all 0.25s ease-in-out; }
+      transition: all 0.25s ease-in-out;
+      flex: 1; }
       #welcome aside button:last-of-type {
         margin: 15px; }
       #welcome aside button .flex-fix {
@@ -532,6 +560,9 @@ hr {
         margin: 0px;
         width: 80%;
         text-align: left; }
+        @media (min-width: 992px) and (max-width: 1199px) {
+          #welcome aside button h2 {
+            width: 95%; } }
       #welcome aside button:nth-of-type(1) {
         background: linear-gradient(rgba(140, 198, 62, 0.55), rgba(140, 198, 62, 0.55)), url("../imgs/content/belmont_theater.PNG");
         background-size: 100% auto;
@@ -609,10 +640,7 @@ hr {
   @media (max-width: 991px) {
     #explore-btn, #tour-btn {
       display: block;
-      width: 60%;
+      width: 80%;
       margin: 0 auto 20px; } }
-  @media (max-width: 767px) {
-    #explore-btn, #tour-btn {
-      width: 80%; } }
 
 /*# sourceMappingURL=main.css.map */
