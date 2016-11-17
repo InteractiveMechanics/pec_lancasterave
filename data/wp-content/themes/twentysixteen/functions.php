@@ -419,3 +419,21 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
+
+
+// Custom Functions for PEC Lancaster Ave
+add_filter('acf/fields/relationship/query/name=tour_stops', 'relationship_options_filter', 10, 3);
+
+function relationship_options_filter($options, $field, $the_post) {
+	
+	$options['post_status'] = array('publish');
+	
+	return $options;
+}
+function remove_tabs() {
+    remove_menu_page('edit-comments.php');
+    remove_menu_page('themes.php');
+    remove_menu_page('tools.php');
+}
+
+add_action( 'admin_menu', 'remove_tabs' );

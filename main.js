@@ -55,7 +55,7 @@ map.addLayer(era1Group).addLayer(era2Group).addLayer(era3Group).addLayer(era4Gro
 var customControlTimeline = L.Control.extend({options: {position: 'bottomright'},
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'timeline-container');
-        container.innerHTML = '<div class="timeline-wrapper"><button id="era-all">View All</button><button id="era-1" data-era-width="1" >1600-1699</button><button id="era-2" data-era-width="2">1700-1749</button><button id="era-3" data-era-width="2">1750-1799</button><button id="era-4" data-era-width="2">1800-1849</button><button id="era-5" data-era-width="2">1850-1899</button><button id="era-6" data-era-width="3">1900-1919</button><button id="era-7" data-era-width="3">1920-1939</button><button id="era-8" data-era-width="3">1940-1959</button><button id="era-9" data-era-width="3">1960-1979</button><button id="era-10" data-era-width="3">1980-1999</button><button id="era-11" data-era-width="3">2000+</button></div>';
+        container.innerHTML = '<div class="timeline-wrapper"><button data-era="0">View All</button><button data-era="1" data-era-width="1" >1600-1699</button><button data-era="2" data-era-width="2">1700-1749</button><button data-era="3" data-era-width="2">1750-1799</button><button data-era="4 data-era-width="2">1800-1849</button><button data-era="5" data-era-width="2">1850-1899</button><button data-era="6" data-era-width="3">1900-1919</button><button data-era="7" data-era-width="3">1920-1939</button><button data-era="8" data-era-width="3">1940-1959</button><button data-era="9" data-era-width="3">1960-1979</button><button data-era="10" data-era-width="3">1980-1999</button><button data-era="11" data-era-width="3">2000+</button></div>';
         return container;
     }
 
@@ -68,7 +68,7 @@ map.addControl(new customControlTimeline);
 var customControlTimelineMobile = L.Control.extend({options: {position: 'bottomright'},
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'timeline-container-mobile');
-        container.innerHTML = '<select id="timeline-wrapper" class="selectpicker"><option id="era-all" data-era="0">View All Time Periods</option><option id="era-1" data-era-width="1" data-era="1">1600-1699</option><option id="era-2" data-era-width="2" data-era="2">1700-1749</option><option id="era-3" data-era-width="2" data-era="3">1750-1799</option><option id="era-4" data-era-width="2" data-era="4">1800-1849</option><option id="era-5" data-era-width="2" data-era="5">1850-1899</option><option id="era-6" data-era-width="3" data-era="6">1900-1919</option><option id="era-7" data-era-width="3" data-era="7">1920-1939</option><option id="era-8" data-era-width="3" data-era="8">1940-1959</option><option id="era-9" data-era-width="3" data-era="9">1960-1979</option><option id="era-10" data-era-width="3" data-era="10">1980-1999</option><button id="era-11" data-era-width="3" data-era="11">2000+</option></select>';
+        container.innerHTML = '<select id="timeline-wrapper" class="selectpicker"><option id="era-all" data-era="0">View All Time Periods</option><option id="era-1" data-era-width="1" data-era="1">1600-1699</option><option id="era-2" data-era-width="2" data-era="2">1700-1749</option><option id="era-3" data-era-width="2" data-era="3">1750-1799</option><option id="era-4" data-era-width="2" data-era="4">1800-1849</option><option id="era-5" data-era-width="2" data-era="5">1850-1899</option><option id="era-6" data-era-width="3" data-era="6">1900-1919</option><option id="era-7" data-era-width="3" data-era="7">1920-1939</option><option id="era-8" data-era-width="3" data-era="8">1940-1959</option><option id="era-9" data-era-width="3" data-era="9">1960-1979</option><option id="era-10" data-era-width="3" data-era="10">1980-1999</option><option><button id="era-11" data-era-width="3" data-era="11">2000+</option></select>';
         return container;
     }
 
@@ -313,7 +313,7 @@ var dataSuccess = function(data) {
                     if (d.source_url) {
                         console.log(d.source_url, index);
                         var imageURL = d.source_url;
-                        jsonData["features"][index]["properties"]["img"] = imageURL;
+                        //jsonData["features"][index]["properties"]["img"] = imageURL;
                     }
                 });
             }
@@ -485,6 +485,7 @@ var dataSuccess = function(data) {
 	var inventoryLayer = L.geoJson(jsonData, layerOptions);
 	map.addLayer(inventoryLayer);
 	map.fitBounds(boundingGroup.getBounds());
+	map.doubleClickZoom.disable(); 
 	
 	
 };
@@ -500,13 +501,17 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
 // Map Btn Functions - Except Timeline
 
 var categoryFilterTasks = function(LayerGroup, button) {
+	if ($('.timeline-wrapper button').hasClass('active')) {
+	    $('.timeline-wrapper button').removeClass('active');
+    } 
     if(map.hasLayer(LayerGroup)) {
         $(button).removeClass('active');
-        map.removeLayer(LayerGroup);
-    } else {
+		map.removeLayer(LayerGroup);
+   } else {
         map.addLayer(LayerGroup);        
-        $(button).addClass('active');
+		$(button).addClass('active');
     }
+  
 }
 
 $('.logo-btn').click(function() {
@@ -592,12 +597,16 @@ var eraFilterTasks = function(LayerGroup, button) {
         $('.timeline-wrapper button').removeClass('active');  
     } 
     $(button).addClass('active');
+    $('.filter-arts').removeClass('active');
+    $('.filter-civilrights').removeClass('active');
+    $('.filter-development').removeClass('active');
+    $('.filter-infrastructure').removeClass('active');
     map.addLayer(allerasGroup);
     map.removeLayer(allerasGroup);
     map.addLayer(LayerGroup);
 }
 
-$('#era-all').click(function() {
+$('button[data-era="0"]').click(function() {
     if ($('.timeline-wrapper button').hasClass('active')) {
         $('.timeline-wrapper button').removeClass('active');  
     } 
@@ -606,48 +615,49 @@ $('#era-all').click(function() {
     map.addLayer(allCategoriesGroup);
 });
 
-$('#era-1').click(function() {
-    eraFilterTasks(era1Group, '#era-1');
+$('button[data-era="1"]').click(function() {
+    eraFilterTasks(era1Group, 'button[data-era="1"]');
 });
 
-$('#era-2').click(function() {
-    eraFilterTasks(era2Group, '#era-2');
+$('button[data-era="2"]').click(function() {
+    eraFilterTasks(era2Group, 'button[data-era="2"]');
 });
 
-$('#era-3').click(function() {
-    eraFilterTasks(era3Group, '#era-3');
+$('button[data-era="3"]').click(function() {
+    eraFilterTasks(era3Group, 'button[data-era="3"]');
 });
 
-$('#era-4').click(function() {
-    eraFilterTasks(era4Group, '#era-4');
+$('button[data-era="4"]').click(function() {
+    eraFilterTasks(era4Group, 'button[data-era="4"]');
 });
 
-$('#era-5').click(function() {
-    eraFilterTasks(era5Group, '#era-5');
+$('button[data-era="5"]').click(function() {
+    eraFilterTasks(era5Group, 'button[data-era="5"]');
 });
 
-$('#era-6').click(function() {
-    eraFilterTasks(era6Group, '#era-6');
+$('button[data-era="6"]').click(function() {
+    eraFilterTasks(era6Group, 'button[data-era="6"]');
 });
 
-$('#era-7').click(function() {
-    eraFilterTasks(era7Group, '#era-7');
+$('button[data-era="7"]').click(function() {
+    eraFilterTasks(era7Group, 'button[data-era="7"]');
 });
 
-$('#era-8').click(function() {
-    eraFilterTasks(era8Group, '#era-8');
+$('button[data-era="8"]').click(function() {
+    eraFilterTasks(era8Group, 'button[data-era="8"]');
 });
 
-$('#era-9').click(function() {
-    eraFilterTasks(era9Group, '#era-9');
+$('button[data-era="9"]').click(function() {
+    eraFilterTasks(era9Group, 'button[data-era="9"]');
 });
 
-$('#era-10').click(function() {
-    eraFilterTasks(era10Group, '#era-10');
+$('button[data-era="10"]').click(function() {
+    eraFilterTasks(era10Group, 'button[data-era="10"]');
 });
 
-$('#era-11').click(function() {
-    eraFilterTasks(era11Group, '#era-11');
+$('button[data-era="11"]').click(function() {
+    eraFilterTasks(era11Group, 'button[data-era="11"]');
+    alert('your function is working');
 });
 
 // Functions related to Welcome Screen
@@ -791,6 +801,8 @@ $('#development-btn').click(function() {
     $('.filter-development').addClass('active');
 })
 
+
+
 // Tour functions
 
 var setupTourIntroExit = function(text) {
@@ -906,7 +918,5 @@ $('#prev-stop').click(function() {
 		showFullMap();
 	}		
 });
-
-
 
 
