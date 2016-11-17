@@ -592,9 +592,14 @@ var eraFilterTasks = function(LayerGroup, button) {
         $('.timeline-wrapper button').removeClass('active');  
     } 
     $(button).addClass('active');
+    $('.filter-arts').removeClass('active');
+    $('.filter-civilrights').removeClass('active');
+    $('.filter-development').removeClass('active');
+    $('.filter-infrastructure').removeClass('active');
     map.addLayer(allerasGroup);
     map.removeLayer(allerasGroup);
     map.addLayer(LayerGroup);
+   
 }
 
 $('#era-all').click(function() {
