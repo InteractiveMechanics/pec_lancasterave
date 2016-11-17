@@ -9,6 +9,10 @@
  * @since Twenty Sixteen 1.0
  */
 
+$location = "http://dev.interactivemechanics.com/lancasterave";
+wp_redirect( $location, 301 );
+exit;
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
