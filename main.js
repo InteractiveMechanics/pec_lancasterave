@@ -502,16 +502,16 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
 
 var categoryFilterTasks = function(LayerGroup, button) {
 	if ($('.timeline-wrapper button').hasClass('active')) {
-        $('.timeline-wrapper button').removeClass('active');  
-    }
-     
+	    $('.timeline-wrapper button').removeClass('active');
+    } 
     if(map.hasLayer(LayerGroup)) {
         $(button).removeClass('active');
-        map.removeLayer(LayerGroup);
-    } else {
+		map.removeLayer(LayerGroup);
+   } else {
         map.addLayer(LayerGroup);        
-        $(button).addClass('active');
+		$(button).addClass('active');
     }
+  
 }
 
 $('.logo-btn').click(function() {
@@ -613,52 +613,50 @@ $('button[data-era="0"]').click(function() {
     $(this).addClass('active');
     map.addLayer(allerasGroup);
     map.addLayer(allCategoriesGroup);
-	alert('your function is working!');
 });
 
 $('button[data-era="1"]').click(function() {
-    eraFilterTasks(era1Group, '#era-1');
-    alert('your function is working, maybe');
+    eraFilterTasks(era1Group, 'button[data-era="1"]');
 });
 
 $('button[data-era="2"]').click(function() {
-    eraFilterTasks(era2Group, '#era-2');
+    eraFilterTasks(era2Group, 'button[data-era="2"]');
 });
 
 $('button[data-era="3"]').click(function() {
-    eraFilterTasks(era3Group, '#era-3');
+    eraFilterTasks(era3Group, 'button[data-era="3"]');
 });
 
 $('button[data-era="4"]').click(function() {
-    eraFilterTasks(era4Group, '#era-4');
+    eraFilterTasks(era4Group, 'button[data-era="4"]');
 });
 
 $('button[data-era="5"]').click(function() {
-    eraFilterTasks(era5Group, '#era-5');
+    eraFilterTasks(era5Group, 'button[data-era="5"]');
 });
 
 $('button[data-era="6"]').click(function() {
-    eraFilterTasks(era6Group, '#era-6');
+    eraFilterTasks(era6Group, 'button[data-era="6"]');
 });
 
 $('button[data-era="7"]').click(function() {
-    eraFilterTasks(era7Group, '#era-7');
+    eraFilterTasks(era7Group, 'button[data-era="7"]');
 });
 
 $('button[data-era="8"]').click(function() {
-    eraFilterTasks(era8Group, '#era-8');
+    eraFilterTasks(era8Group, 'button[data-era="8"]');
 });
 
 $('button[data-era="9"]').click(function() {
-    eraFilterTasks(era9Group, '#era-9');
+    eraFilterTasks(era9Group, 'button[data-era="9"]');
 });
 
 $('button[data-era="10"]').click(function() {
-    eraFilterTasks(era10Group, '#era-10');
+    eraFilterTasks(era10Group, 'button[data-era="10"]');
 });
 
 $('button[data-era="11"]').click(function() {
-    eraFilterTasks(era11Group, '#era-11');
+    eraFilterTasks(era11Group, 'button[data-era="11"]');
     alert('your function is working');
 });
 
