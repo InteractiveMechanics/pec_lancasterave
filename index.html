@@ -31,7 +31,7 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="favicons/android-icon-192x192.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
@@ -50,6 +50,7 @@
 </head>
 
 <body>
+    <div id="preloader" class="in"></div>
     <div class="map-container">
         <div id="map">
         </div>
@@ -78,13 +79,13 @@
 	                      <img src="" id="img" alt="">
 	                    </div>
                     
-						<p class="caption-wrapper"><span id="caption"></span> <span id="image-from">Image from </span><a href="" id="attrUrl" target="_blank"><span id="attr"></span></a></p>
+						<p class="caption-wrapper"><span id="caption"></span>. <span id="image-from">Image from </span><a href="" id="attrUrl" target="_blank"><span id="attr"></span></a>.</p>
                     
 						<hr>
 
 	                    <div class="description-wrapper">
 	                      	<p id="description"></p>
-						  	<p><span id="info-from">Information taken from</span> <a href="" id="sourceUrl" target="_blank"><span id="sourceTitle"></span></a> <span id="more-details">For more details visit</span> <a href="" id="resourceUrl" target="_blank"><span id="resourceTitle"></span></a></p>
+						  	<p><span id="info-from">Information taken from</span> <a href="" id="sourceUrl" target="_blank"><span id="sourceTitle"></span></a>. <span id="more-details">For more details visit</span> <a href="" id="resourceUrl" target="_blank"><span id="resourceTitle"></span></a>.</p>
 	                  	</div>    
 	                  	  	
 	                </div>
@@ -95,7 +96,7 @@
     
 
 
-    <div id="welcome" class="hidden">
+    <div id="welcome" class="hidden fade">
 
       <article>
         <img src="imgs/logo.svg" alt="West Philadelphia History Map logo">

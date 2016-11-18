@@ -86,7 +86,10 @@ hr {
 #address {
   letter-spacing: 0.4px;
   margin-bottom: 0px;
-  display: inline; }
+  display: inline;
+  top: 2px;
+  position: relative;
+  font-size: 1em; }
 
 .popup-inner {
   display: flex;
@@ -100,9 +103,9 @@ hr {
   width: 85%;
   margin-top: 0px; }
 
-#icon {
-  height: 25px;
-  margin-right: 7px; }
+#icon, #icon-tour {
+  height: 20px;
+  margin-right: 10px; }
 
 .caption-wrapper {
   font-style: italic;
@@ -137,7 +140,7 @@ hr {
   background-color: #ffffff;
   border-radius: 50%;
   border: none;
-  webkit-box-shadow: 0px 2px 5px 1px #cccccc;
+  -webkit-box-shadow: 0px 2px 5px 1px #cccccc;
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
   box-shadow: 0px 2px 5px 1px #cccccc; }
   .close img {
@@ -155,16 +158,17 @@ hr {
   width: 30vw;
   margin-left: -10px;
   background-color: #ffffff;
-  webkit-box-shadow: 0px 2px 5px 1px #cccccc;
+  -webkit-box-shadow: 0px 2px 5px 1px #cccccc;
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
-  box-shadow: 0px 2px 5px 1px #cccccc; }
+  box-shadow: 0px 2px 5px 1px #cccccc;
+  display: table; }
   @media (max-width: 991px) {
     #tour-pagination {
       width: 100%; } }
   #tour-pagination button {
-    width: 49%;
+    width: 50%;
     text-transform: uppercase;
-    padding: 20px 10px;
+    padding: 20px;
     background-color: #ffffff;
     border: none;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -540,7 +544,7 @@ hr {
       height: 25%;
       color: #ffffff;
       border: none;
-      padding: 15px;
+      padding: 20px;
       transition: all 0.25s ease-in-out;
       flex: 1; }
       #welcome aside button:last-of-type {
@@ -552,14 +556,17 @@ hr {
         height: 100%;
         transition: all 0.25s ease-in-out; }
       #welcome aside button h4 {
-        font-size: 1.2em;
-        margin: 0px;
-        text-align: left; }
+        font-size: 1.1em;
+        margin: 0 0 5px;
+        text-align: left;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
       #welcome aside button h2 {
         font-size: 2.2em;
+        line-height: 1.1;
         margin: 0px;
         width: 80%;
-        text-align: left; }
+        text-align: left;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); }
         @media (min-width: 992px) and (max-width: 1199px) {
           #welcome aside button h2 {
             width: 95%; } }
@@ -599,8 +606,8 @@ hr {
   border: 2px solid #ffffff;
   background-color: #ffffff;
   transition: all 0.25s ease-in-out;
-  padding: 10px 30px;
-  font-size: 15px;
+  padding: 18px 30px;
+  font-size: 16px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase; }
@@ -610,22 +617,23 @@ hr {
     color: #a3d265; }
   #explore-btn:hover, #tour-btn:hover {
     background-color: #a3d265;
-    border-color: #ffffff;
+    border-color: #a3d265;
     color: #ffffff;
     fill: #ffffff;
-    text-decoration: none; }
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35); }
   #explore-btn:hover svg, #tour-btn:hover svg {
     fill: #ffffff; }
   #explore-btn:active, #tour-btn:active {
     background-color: #a3d265;
-    border-color: #ffffff;
+    border-color: #a3d265;
     color: #ffffff;
     box-shadow: none; }
   #explore-btn:active svg, #tour-btn:active svg {
     fill: #ffffff; }
   #explore-btn:focus, #explore-btn:active:focus, #tour-btn:focus, #tour-btn:active:focus {
     background-color: #a3d265;
-    border-color: #ffffff;
+    border-color: #a3d265;
     color: #ffffff;
     outline: 5px auto #a3d265; }
   #explore-btn:focus, #explore-btn:active:focus svg, #tour-btn:focus, #tour-btn:active:focus svg {
@@ -636,11 +644,36 @@ hr {
   #explore-btn svg, #tour-btn svg {
     position: relative;
     top: 1px;
+    left: 4px;
     fill: #a3d265; }
   @media (max-width: 991px) {
     #explore-btn, #tour-btn {
       display: block;
       width: 80%;
       margin: 0 auto 20px; } }
+
+#preloader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(203, 229, 168, 0.85);
+  z-index: 99999;
+  opacity: 0;
+  transition: 0.5s all; }
+  #preloader.in {
+    opacity: 1; }
+  #preloader:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -36px;
+    margin-left: -36px;
+    width: 72px;
+    height: 72px;
+    background: url(../imgs/loading.svg) no-repeat;
+    background-size: 100%; }
 
 /*# sourceMappingURL=main.css.map */

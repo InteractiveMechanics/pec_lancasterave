@@ -87,7 +87,7 @@
 			height: 25%;
 			color: #ffffff;
 			border: none;
-			padding: 15px;
+			padding: 20px;
 			transition: $transition;
 			flex: 1;
 			&:last-of-type {
@@ -101,15 +101,18 @@
 		    	transition: $transition;
 			}
 			h4 {
-				font-size: 1.2em;
-				margin: 0px;
+				font-size: 1.1em;
+                margin: 0 0 5px;
 				text-align: left;
+                text-shadow: 0 0 5px rgba(0,0,0,0.5);
 			}
 			h2 {
 				font-size: 2.2em;
+                line-height: 1.1;
 				margin: 0px;
 				width: 80%;
 				text-align: left;
+                text-shadow: 0 0 5px rgba(0,0,0,0.5);
 				@include screen-md {
 					width: 95%;
 				}
@@ -159,14 +162,15 @@
 
 #explore-btn, #tour-btn {
 	@include big-button($medium-green, #ffffff);
-	padding: 10px 30px;
-	font-size: 15px;
+	padding: 18px 30px;
+    font-size: 16px;
 	font-family: $open-sans;
 	font-weight: 700;
 	text-transform: uppercase;
 	svg {
 		position: relative;
 		top: 1px;
+        left: 4px;
 		fill: $medium-green;
 	}
 	@include screen-ltmd {

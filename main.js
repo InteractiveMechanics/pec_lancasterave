@@ -143,7 +143,6 @@ var showPopup = function(featureData) {
     if ($popup.hasClass('hidden')) {
 
 
-                   
             		$popup.removeClass('hidden').addClass('visible');
             		$('#popup-template').appendTo($popup);
             		$('#title').html(featureData.properties.title);
@@ -159,6 +158,9 @@ var showPopup = function(featureData) {
             		$('#resourceTitle').html(featureData.properties.resourceTitle);
             		$('#resourceUrl').attr('href', featureData.properties.resourceUrl);
                     $('#era').html(featureData.properties.era);
+                    if (featureData.properties.tourstop) {
+                        $('#icon-wrapper').prepend('<img src="imgs/icons/icon-tour.svg" id="icon-tour">');
+                    }
             		if ($category == 'civilrights') {
             			$('#icon').attr('src', 'imgs/icons/icon-civilrights.svg')
             			$('#address').css({'color': '#594a41'});
@@ -191,8 +193,8 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
 	$.each(data, function(index, value){
 		 
 		var rawTourStops = value.tour_stops;
-		console.log("Tour Stops is a " + typeof rawTourStops);
-		console.log(rawTourStops);
+		//console.log("Tour Stops is a " + typeof rawTourStops);
+		//console.log(rawTourStops);
 		
 		var removeCurlyBraces = rawTourStops.replace(/[{}]/g, "");
             
@@ -209,8 +211,8 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
 
         var obj = extractText(removeCurlyBraces);
         tourStopsArray = Object.keys(obj).map(function (key) { return parseInt(obj[key].replace(/['"]+/g, ''));});
-        console.log(tourStopsArray);
-        console.log("each item in tourStopaArray is a " + typeof tourStopsArray[0]);
+        //console.log(tourStopsArray);
+        //console.log("each item in tourStopaArray is a " + typeof tourStopsArray[0]);
         
         
         tourIntro = value.introduction;
@@ -233,7 +235,8 @@ var emptyIf = function(emptyEl, hideThis) {
 
 
 var clearPopup = function() {
-     if ($('#popup').hasClass('visible')) {
+    $('#icon-tour').remove();
+    if ($('#popup').hasClass('visible')) {
 	    $('#popup').addClass('hidden').removeClass('visible');
     }
 }
@@ -252,6 +255,7 @@ var resetPopup = function() {
     $('#resourceTitle').html("");
     $('#resourceUrl').attr('href', "");
     $('#icon').attr('src', '');
+    $('#icon-tour').remove();
 }
 
 
@@ -311,7 +315,7 @@ var dataSuccess = function(data) {
             if (value.image){
                 $.getJSON("http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/" + value.image, function(d) {
                     if (d.source_url) {
-                        console.log(d.source_url, index);
+                        //console.log(d.source_url, index);
                         var imageURL = d.source_url;
                         //jsonData["features"][index]["properties"]["img"] = imageURL;
                     }
@@ -410,8 +414,9 @@ var dataSuccess = function(data) {
         	for (var i = 0; i < tourStopsArray.length; i++) {
 	        	if (featureData.properties.ID == tourStopsArray[i]) {
 		        	tourGroup.addLayer(layer);
-		        	console.log('ID ' + featureData.properties.ID + ", " + featureData.properties.title + ", was added to the tourGroup");
-	        	} 
+                    featureData["properties"]["tourstop"] = true;
+		        	//console.log('ID ' + featureData.properties.ID + ", " + featureData.properties.title + ", was added to the tourGroup");
+	        	}
         	}
         	
         	
@@ -469,7 +474,7 @@ var dataSuccess = function(data) {
         	layer.on('click', function(e) {
 	        	  $('.leaflet-marker-icon').css('opacity', '0.7');
 				  layer.setOpacity(1.0);
-				  console.log(featureData);
+				  //console.log(featureData);
 				  showPopup(featureData);
 	        });
 
@@ -492,7 +497,12 @@ var dataSuccess = function(data) {
 
 
 
-$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess);
+$.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-routes/v2/locations', dataSuccess).done(function() {
+    $('#preloader').removeClass('in');
+    setTimeout(function(){
+        $('#preloader').hide();
+    }, 500);
+});
 
 
 
@@ -657,7 +667,6 @@ $('button[data-era="10"]').click(function() {
 
 $('button[data-era="11"]').click(function() {
     eraFilterTasks(era11Group, 'button[data-era="11"]');
-    alert('your function is working');
 });
 
 // Functions related to Welcome Screen
@@ -736,7 +745,7 @@ var removeCivilRights = function() {
 }
 
 var removeInfrastructure = function() {
-	 if (map.hasLayer(infrastructureGroup)) {
+    if (map.hasLayer(infrastructureGroup)) {
         map.removeLayer(infrastructureGroup);
         $('.filter-infrastructure').removeClass('active');
 
@@ -745,14 +754,14 @@ var removeInfrastructure = function() {
 
 
 var removeDevelopment = function() {
-	 if (map.hasLayer(developmentGroup)) {
+    if (map.hasLayer(developmentGroup)) {
         map.removeLayer(developmentGroup);
         $('.filter-development').removeClass('active');
     }
 }
 
 var removeArts = function() {
-	 if (map.hasLayer(artsGroup)) {
+    if (map.hasLayer(artsGroup)) {
         map.removeLayer(artsGroup);
         $('.filter-arts').removeClass('active');
     }
@@ -882,8 +891,13 @@ $('#next-stop').click(function() {
 				resetPopup();
 				restorePopupStyles();
 				showPopup(jsonData.features[i]);
-				console.log(tourStopId);
-				console.log(tourStopsArray.length);			
+				//console.log(tourStopId);
+				//console.log(tourStopsArray.length);	
+
+                var lat = jsonData.features[tourId].geometry.coordinates[1];
+                var lon = jsonData.features[tourId].geometry.coordinates[0];
+        
+                map.setView([lat, lon], 16);
 			}
 			 
 		}
@@ -909,7 +923,12 @@ $('#prev-stop').click(function() {
 			if (jsonData.features[i].properties.ID == tourId) {
 				resetPopup();
 				restorePopupStyles()
-				showPopup(jsonData.features[i]);		
+				showPopup(jsonData.features[i]);	
+
+                var lat = jsonData.features[tourId].geometry.coordinates[1];
+                var lon = jsonData.features[tourId].geometry.coordinates[0];
+        
+                map.setView([lat, lon], 16);
 			}
 			 
 		}

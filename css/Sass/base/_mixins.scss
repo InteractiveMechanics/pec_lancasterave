@@ -12,10 +12,11 @@
 	}
 	&:hover {
 		background-color: $color_1;
-		border-color: $color_2;
+		border-color: $color_1;
 		color: $color_2;
 		fill: $color_2;
 		text-decoration: none;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.35);
 	}
 	&:hover svg {
 		fill: $color_2;
@@ -23,7 +24,7 @@
 	}
 	&:active {
 		background-color: $color_1;
-		border-color: $color_2;
+		border-color: $color_1;
 		color: $color_2;
 		box-shadow: none;
 	}
@@ -33,7 +34,7 @@
 	}
 	&:focus, &:active:focus {
 		background-color: $color_1;
-		border-color: $color_2;
+		border-color: $color_1;
 		color: $color_2;
 		outline: 5px auto $color_1;
 	}
