@@ -317,7 +317,7 @@ var dataSuccess = function(data) {
                     if (d.source_url) {
                         //console.log(d.source_url, index);
                         var imageURL = d.source_url;
-                        //jsonData["features"][index]["properties"]["img"] = imageURL;
+                        jsonData["features"][index]["properties"]["img"] = imageURL;
                     }
                 });
             }
@@ -408,6 +408,8 @@ var dataSuccess = function(data) {
         		developmentGroup.addLayer(layer);
         	} else if (featureData.properties.category == 'infrastructure') {
         		infrastructureGroup.addLayer(layer);
+        	} else {
+	        	artsGroup.addLayer(layer);
         	}
         	
         	
@@ -512,15 +514,32 @@ $.getJSON('http://dev.interactivemechanics.com/lancasterave/data/wp-json/rest-ro
 
 var categoryFilterTasks = function(LayerGroup, button) {
 	if ($('.timeline-wrapper button').hasClass('active')) {
+	   // $('.timeline-wrapper button').removeClass('active');
+	    $(button).addClass('active');
+	    map.removeLayer(era1Group);
+	    map.removeLayer(era2Group);
+	    map.removeLayer(era3Group);
+	    map.removeLayer(era4Group);
+	    map.removeLayer(era5Group);
+	    map.removeLayer(era6Group);
+	    map.removeLayer(era7Group);
+	    map.removeLayer(era8Group);
+	    map.removeLayer(era9Group);
+	    map.removeLayer(era10Group);
+	    map.removeLayer(era11Group);
+	    map.addLayer(LayerGroup);
+	    alert('your function is working');
 	    $('.timeline-wrapper button').removeClass('active');
-    } 
-    if(map.hasLayer(LayerGroup)) {
-        $(button).removeClass('active');
-		map.removeLayer(LayerGroup);
-   } else {
-        map.addLayer(LayerGroup);        
-		$(button).addClass('active');
-    }
+	    
+    } else {
+    	if(map.hasLayer(LayerGroup)) {
+        	$(button).removeClass('active');
+			map.removeLayer(LayerGroup);
+   		} else {
+        	map.addLayer(LayerGroup);        
+			$(button).addClass('active');
+    	}
+   }
   
 }
 
@@ -606,13 +625,19 @@ var eraFilterTasks = function(LayerGroup, button) {
     if ($('.timeline-wrapper button').hasClass('active')) {
         $('.timeline-wrapper button').removeClass('active');  
     } 
-    $(button).addClass('active');
+    $(button).addClass('active'); 
     $('.filter-arts').removeClass('active');
     $('.filter-civilrights').removeClass('active');
     $('.filter-development').removeClass('active');
     $('.filter-infrastructure').removeClass('active');
     map.addLayer(allerasGroup);
     map.removeLayer(allerasGroup);
+    
+    map.removeLayer(artsGroup);
+    map.removeLayer(civilrightsGroup);
+    map.removeLayer(infrastructureGroup);
+    map.removeLayer(developmentGroup);
+    
     map.addLayer(LayerGroup);
 }
 
@@ -627,6 +652,7 @@ $('button[data-era="0"]').click(function() {
 
 $('button[data-era="1"]').click(function() {
     eraFilterTasks(era1Group, 'button[data-era="1"]');
+    
 });
 
 $('button[data-era="2"]').click(function() {
@@ -667,6 +693,40 @@ $('button[data-era="10"]').click(function() {
 
 $('button[data-era="11"]').click(function() {
     eraFilterTasks(era11Group, 'button[data-era="11"]');
+    
+    if (map.hasLayer(artsGroup)) {
+    	$('.filter-arts').addClass('active');
+    	alert('contains arts group');
+    } else {
+	    $('.filter-arts').removeClass('active');
+	    alert('does not contain arts group');
+    }
+    
+    if (map.hasLayer(civilrightsGroup)) {
+    	$('.filter-civilrights').addClass('active');
+    	alert('contains civilrights group');
+    } else {
+	    $('.filter-civilrights').removeClass('active');
+	    alert('does NOT contain civilrights group');
+    }
+    
+    if (map.hasLayer(developmentGroup)) {
+    	$('.filter-development').addClass('active');
+    	alert('contains development group');
+    } else {
+	    $('.filter-development').removeClass('active');
+	    alert('does NOT contain development group');
+    }
+    
+    if (map.hasLayer(infrastructureGroup)) {
+    	$('.filter-infrastructure').addClass('active');
+    	alert('contains infrstrastructure group');
+    	
+    } else {
+	    $('.filter-infrastructure').removeClass('active');
+	    alert('does NOT contain infrastructure group');
+    }
+
 });
 
 // Functions related to Welcome Screen
@@ -771,9 +831,16 @@ var removeArts = function() {
 $('#arts-btn').click(function() {
     //hideWelcome();
 	showMapLite();
+	map.removeLayer(allCategoriesGroup);
+    map.removeLayer(allerasGroup);
+    $('.filter-civilrights').removeClass('active');
+    $('.filter-development').removeClass('active');
+    $('.filter-infrastructure').removeClass('active');
+/*
     removeCivilRights();      
     removeInfrastructure();
     removeDevelopment();
+*/
     map.addLayer(artsGroup);
     $('.filter-arts').addClass('active');
 })
@@ -782,9 +849,16 @@ $('#arts-btn').click(function() {
 $('#civilrights-btn').click(function() {
     //hideWelcome();
     showMapLite();
+    map.removeLayer(allCategoriesGroup);
+    map.removeLayer(allerasGroup);
+    $('.filter-arts').removeClass('active');
+    $('.filter-development').removeClass('active');
+    $('.filter-infrastructure').removeClass('active');
+/*
 	removeArts();
     removeInfrastructure();
     removeDevelopment();
+*/
     map.addLayer(civilrightsGroup);
     $('.filter-civilrights').addClass('active');
     
@@ -793,19 +867,35 @@ $('#civilrights-btn').click(function() {
 $('#infrastructure-btn').click(function() {
     //hideWelcome();
     showMapLite();
+    map.removeLayer(allCategoriesGroup);
+    map.removeLayer(allerasGroup);
+    $('.filter-arts').removeClass('active');
+    $('.filter-civilrights').removeClass('active');
+    $('.filter-development').removeClass('active');
+/*
     removeCivilRights();
     removeArts();
     removeDevelopment();
-    map.addLayer(infrastructureGroup);
+*/
+
+	   map.addLayer(infrastructureGroup);
     $('.filter-infrastructure').addClass('active');
 })
 
 $('#development-btn').click(function() {
     //hideWelcome();
     showMapLite();
+    map.removeLayer(allCategoriesGroup);
+    map.removeLayer(allerasGroup);
+    $('.filter-arts').removeClass('active');
+    $('.filter-civilrights').removeClass('active');
+    $('.filter-infrastructure').removeClass('active');
+    
+/*
     removeCivilRights();
 	removeInfrastructure();
     removeArts();
+*/
     map.addLayer(developmentGroup);
     $('.filter-development').addClass('active');
 })
