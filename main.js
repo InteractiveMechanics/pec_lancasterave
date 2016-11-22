@@ -1,7 +1,8 @@
 var map = L.map('map', {zoomControl:false }).setView([39.967764, -75.229737], 13.5);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/interactivemech/cith8vx1k000l2imon11lv5iq/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaW50ZXJhY3RpdmVtZWNoIiwiYSI6InJlcUtqSk0ifQ.RUwHuEkBbXoJ6SgOnXmYFg', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 18
 }).addTo(map);
 
 
@@ -331,41 +332,21 @@ var dataSuccess = function(data) {
 
         	var category = (featureData.properties.category);
 
-        	var artsIcon = L.icon({
-		    iconUrl: 'imgs/markers/mapmarker-arts@2x.png',
-
-		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+        	
+        	var categoryIcon = L.Icon.extend({
+			    options: {
+			        iconSize:     [67, 60],
+			        shadowSize:   [30, 30],
+			        iconAnchor:   [33, 52],
+			        shadowAnchor: [4, 62]
+			    }
 			});
-
-			var civilrightsIcon = L.icon({
-		    iconUrl: 'imgs/markers/mapmarker-civilrights@2x.png',
-
-		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-			});
-
-			var developmentIcon = L.icon({
-		    iconUrl: 'imgs/markers/mapmarker-development@2x.png',
-
-		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-			});
-
-			var infrastructureIcon = L.icon({
-		    iconUrl: 'imgs/markers/mapmarker-infrastructure@2x.png',
-
-		    iconSize:     [67.5, 60], // size of the icon
-		    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-		    //shadowAnchor: [12, 12],  // the same for the shadow
-		    //popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-			});
+        	
+			var artsIcon = new categoryIcon({iconUrl: 'imgs/markers/mapmarker-arts@2x.png'}),
+				civilrightsIcon = new categoryIcon({iconUrl: 'imgs/markers/mapmarker-civilrights@2x.png'}),
+				developmentIcon = new categoryIcon({iconUrl: 'imgs/markers/mapmarker-development@2x.png'}),
+				infrastructureIcon = new categoryIcon({iconUrl: 'imgs/markers/mapmarker-infrastructure@2x.png'});
+        
 
 			var getIcon = function(x) {
             var icon = artsIcon;
@@ -492,7 +473,8 @@ var dataSuccess = function(data) {
 	var inventoryLayer = L.geoJson(jsonData, layerOptions);
 	map.addLayer(inventoryLayer);
 	map.fitBounds(boundingGroup.getBounds());
-	map.doubleClickZoom.disable(); 
+	map.doubleClickZoom.disable();
+	
 	
 	
 };
@@ -528,7 +510,6 @@ var categoryFilterTasks = function(LayerGroup, button) {
 	    map.removeLayer(era10Group);
 	    map.removeLayer(era11Group);
 	    map.addLayer(LayerGroup);
-	    alert('your function is working');
 	    $('.timeline-wrapper button').removeClass('active');
 	    
     } else {
@@ -693,40 +674,6 @@ $('button[data-era="10"]').click(function() {
 
 $('button[data-era="11"]').click(function() {
     eraFilterTasks(era11Group, 'button[data-era="11"]');
-    
-    if (map.hasLayer(artsGroup)) {
-    	$('.filter-arts').addClass('active');
-    	alert('contains arts group');
-    } else {
-	    $('.filter-arts').removeClass('active');
-	    alert('does not contain arts group');
-    }
-    
-    if (map.hasLayer(civilrightsGroup)) {
-    	$('.filter-civilrights').addClass('active');
-    	alert('contains civilrights group');
-    } else {
-	    $('.filter-civilrights').removeClass('active');
-	    alert('does NOT contain civilrights group');
-    }
-    
-    if (map.hasLayer(developmentGroup)) {
-    	$('.filter-development').addClass('active');
-    	alert('contains development group');
-    } else {
-	    $('.filter-development').removeClass('active');
-	    alert('does NOT contain development group');
-    }
-    
-    if (map.hasLayer(infrastructureGroup)) {
-    	$('.filter-infrastructure').addClass('active');
-    	alert('contains infrstrastructure group');
-    	
-    } else {
-	    $('.filter-infrastructure').removeClass('active');
-	    alert('does NOT contain infrastructure group');
-    }
-
 });
 
 // Functions related to Welcome Screen
