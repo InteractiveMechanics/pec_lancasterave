@@ -56,17 +56,12 @@
 	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 	
 	ga('create', 'UA-87840928-1', 'auto');
-	ga('send', 'pageview');
+    ga('send', 'pageview');
 	
 	function sendGAEvent(screen) {
-    	ga('send', 'screenview', {
-                'appName': 'West Philly History Map',
-                'screenName': screen
-    	});
+    	ga('set', 'page', screen);
+        ga('send', 'pageview');
 	}
-
-	sendGAEvent('PEC - West Philadelphia History Map');
-	
 	
 	</script>
 	

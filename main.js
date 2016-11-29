@@ -459,6 +459,8 @@ var dataSuccess = function(data) {
 				  layer.setOpacity(1.0);
 				  //console.log(featureData);
 				  showPopup(featureData);
+
+                  sendGAEvent(featureData.properties.title);
 	        });
 
 	        $( ".close" ).click(function() {
@@ -681,6 +683,8 @@ $('button[data-era="11"]').click(function() {
 
 
 var showWelcome = function() {
+    sendGAEvent('Welcome Screen');
+
     var $welcome = $('#welcome');
     if ($welcome.hasClass('hidden')) {
         $welcome.removeClass('hidden');
@@ -741,6 +745,8 @@ var showMapLite = function() {
 
 
 $('#explore-btn').click(function() {
+    sendGAEvent('Explore the Map');
+
    showFullMap();
    alterHistory('/map');
 });
@@ -882,6 +888,8 @@ var restorePopupStyles = function() {
 
 
 $('#tour-btn').click(function() {
+    sendGAEvent('New Freedom Tour');
+
     alterHistory('/map');
 	hideWelcome();
 	resetPopup();
