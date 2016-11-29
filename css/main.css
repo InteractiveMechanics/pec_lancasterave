@@ -165,7 +165,8 @@ hr {
   -webkit-box-shadow: 0px 2px 5px 1px #cccccc;
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
   box-shadow: 0px 2px 5px 1px #cccccc;
-  display: table; }
+  display: table;
+  white-space: nowrap; }
   @media (max-width: 991px) {
     #tour-pagination {
       width: 100%; } }
