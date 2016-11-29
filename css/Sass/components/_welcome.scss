@@ -56,7 +56,7 @@
 				margin-bottom: 30px;
 			}
 			> a {
-				color: initial;
+				color: #000000;
 				text-decoration: none;
 				border-bottom: 1px dotted black;
 				transition: $transition;
@@ -141,7 +141,7 @@
 			svg {
 				float: right;
 				height: 36px;
-				width: auto;
+				width: 40px;
 				path {
 					fill: #ffffff;
 				}
