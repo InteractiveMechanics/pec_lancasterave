@@ -101,7 +101,8 @@ hr {
 
 #title {
   width: 85%;
-  margin-top: 0px; }
+  margin-top: 10px;
+  line-height: 1.1; }
 
 #icon, #icon-tour {
   height: 20px;
@@ -117,7 +118,8 @@ hr {
 #img {
   width: 100%;
   height: auto;
-  max-height: 500px; }
+  max-height: 500px;
+  margin-bottom: 10px; }
 
 /*
 .img-wrapper {
@@ -129,7 +131,9 @@ hr {
 .description-container {
   position: relative;
   flex: 1 1 auto;
-  overflow-y: auto; }
+  overflow-y: auto;
+  margin: 0 -25px -25px;
+  padding: 0 25px 15px; }
 
 .close {
   position: absolute;
@@ -519,7 +523,7 @@ hr {
       #welcome article p:last-of-type {
         margin-bottom: 30px; }
       #welcome article p > a {
-        color: initial;
+        color: #000000;
         text-decoration: none;
         border-bottom: 1px dotted black;
         transition: all 0.25s ease-in-out; }

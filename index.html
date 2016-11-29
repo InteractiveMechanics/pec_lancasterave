@@ -41,12 +41,36 @@
 	<meta name="theme-color" content="#ffffff">
 	
 	
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0/dist/leaflet.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> <!-- customized version of Bootstrap w/ minimum requirements needed for Bootstrap Select -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+  
+  
+	<!-- GOOGLE ANALYTICS -->
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	
+	ga('create', 'UA-87840928-1', 'auto');
+	ga('send', 'pageview');
+	
+	function sendGAEvent(screen) {
+    	ga('send', 'screenview', {
+                'appName': 'West Philly History Map',
+                'screenName': screen
+    	});
+	}
 
-  <!-- STYLESHEETS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0/dist/leaflet.css" />
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> <!-- customized version of Bootstrap w/ minimum requirements needed for Bootstrap Select -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
-  <link rel="stylesheet" href="./css/main.css">
+	sendGAEvent('PEC - West Philadelphia History Map');
+	
+	
+	</script>
+	
+	  
 </head>
 
 <body>
