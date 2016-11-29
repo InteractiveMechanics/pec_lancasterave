@@ -146,14 +146,14 @@ hr {
   border: none;
   -webkit-box-shadow: 0px 2px 5px 1px #cccccc;
   -moz-box-shadow: 0px 2px 5px 1px #cccccc;
-  box-shadow: 0px 2px 5px 1px #cccccc; }
+  box-shadow: 0px 2px 5px 1px #cccccc;
+  text-align: center; }
   .close img {
     width: 12px;
     height: 12px; }
     @media (max-width: 991px) {
       .close img {
         position: relative;
-        right: 5px;
         bottom: 1px; } }
 
 #tour-pagination {
