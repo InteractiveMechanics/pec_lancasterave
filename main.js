@@ -179,7 +179,10 @@ var showPopup = function(featureData) {
 					emptyIf('#attr', '#image-from');
 					emptyIf('#sourceTitle', '#info-from');
 					emptyIf('#resourceTitle', '#more-details');
-					
+					emptyIf('#caption', '#caption-period');
+					emptyIf('#attr', '#attr-period');
+					emptyIf('#sourceTitle', '#source-period');
+					emptyIf('#resourceTitle', '#resource-period');
 
 
            		} 
