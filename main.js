@@ -932,7 +932,7 @@ $('#next-stop').click(function() {
 		showFullMap();
 	} else {
 		$('#next-stop').html('Next Stop');
-		$('#prev-stop').html('Last Stop');
+		$('#prev-stop').html('Previous Stop');
 		for (i=0; i < jsonData.features.length; i++){
 			if (jsonData.features[i].properties.ID == tourId) {
 				resetPopup();
