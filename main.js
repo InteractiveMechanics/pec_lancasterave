@@ -266,7 +266,7 @@ var resetPopup = function() {
 
 var jsonData = { "type": "FeatureCollection", "features": [] };
 var dataSuccess = function(data) {
-
+    console.log(data);
     $.each(data, function(index, value){
         if (value.latitude && value.longitude){
             var rawEra = value.time_period;
@@ -316,9 +316,8 @@ var dataSuccess = function(data) {
             if (value.image){
                 $.getJSON("http://dev.interactivemechanics.com/lancasterave/data/wp-json/wp/v2/media/" + value.image, function(d) {
                     if (d.source_url) {
-                        //console.log(d.source_url, index);
-                        var imageURL = d.source_url;
-                        jsonData["features"][index]["properties"]["img"] = imageURL;
+                        // console.log(index, d.source_url, value.post_title);
+                        jsonData["features"][index]["properties"]["img"] = d.source_url;
                     }
                 });
             }
