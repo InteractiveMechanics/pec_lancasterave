@@ -56,7 +56,7 @@ map.addLayer(era1Group).addLayer(era2Group).addLayer(era3Group).addLayer(era4Gro
 var customControlTimeline = L.Control.extend({options: {position: 'bottomright'},
     onAdd: function (map) {
         var container = L.DomUtil.create('div', 'timeline-container');
-        container.innerHTML = '<div class="timeline-wrapper"><button data-era="0">View All</button><button data-era="1" data-era-width="1" >1600-1699</button><button data-era="2" data-era-width="2">1700-1749</button><button data-era="3" data-era-width="2">1750-1799</button><button data-era="4 data-era-width="2">1800-1849</button><button data-era="5" data-era-width="2">1850-1899</button><button data-era="6" data-era-width="3">1900-1919</button><button data-era="7" data-era-width="3">1920-1939</button><button data-era="8" data-era-width="3">1940-1959</button><button data-era="9" data-era-width="3">1960-1979</button><button data-era="10" data-era-width="3">1980-1999</button><button data-era="11" data-era-width="3">2000+</button></div>';
+        container.innerHTML = '<div class="timeline-wrapper"><button data-era="0">View All</button><button data-era="1" data-era-width="1" >1600-1699</button><button data-era="2" data-era-width="2">1700-1749</button><button data-era="3" data-era-width="2">1750-1799</button><button data-era="4" data-era-width="2">1800-1849</button><button data-era="5" data-era-width="2">1850-1899</button><button data-era="6" data-era-width="3">1900-1919</button><button data-era="7" data-era-width="3">1920-1939</button><button data-era="8" data-era-width="3">1940-1959</button><button data-era="9" data-era-width="3">1960-1979</button><button data-era="10" data-era-width="3">1980-1999</button><button data-era="11" data-era-width="3">2000+</button></div>';
         return container;
     }
 
@@ -526,6 +526,7 @@ var categoryFilterTasks = function(LayerGroup, button) {
 
 $('.logo-btn').click(function() {
     showWelcome();
+    alterHistory('/');
     $('#welcome').addClass('visible');
 });
 
@@ -688,7 +689,7 @@ var showWelcome = function() {
 	map.addLayer(allCategoriesGroup);
 	map.addLayer(allerasGroup);
 	map.fitBounds(boundingGroup.getBounds());
-	clearPopup();    
+	clearPopup();
 }
 
 var hideWelcome = function() {
@@ -741,6 +742,7 @@ var showMapLite = function() {
 
 $('#explore-btn').click(function() {
    showFullMap();
+   alterHistory('/map');
 });
 
 
@@ -880,6 +882,7 @@ var restorePopupStyles = function() {
 
 
 $('#tour-btn').click(function() {
+    alterHistory('/map');
 	hideWelcome();
 	resetPopup();
 	if(map.hasLayer(tourGroup)) {
@@ -975,4 +978,17 @@ $('#prev-stop').click(function() {
 	}		
 });
 
+var alterHistory = function(link) {
+    history.pushState(null, null, link);
+}
+
+$(window).on("popstate", function(e) {
+    console.log(e);
+    if (e.originalEvent.state !== null) {
+        hideWelcome();
+    } else {
+        alterHistory('/');
+        showWelcome();
+    }
+});
 
