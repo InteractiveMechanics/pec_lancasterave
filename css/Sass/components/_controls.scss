@@ -64,7 +64,7 @@
 
 .category-filter {
 	background-color: #fff;
-	background-size: 25px 25px;
+	background-size: 25px auto;
 	background-position: center;
 	background-repeat: no-repeat;
 	border: none;
@@ -98,7 +98,7 @@
 	&:hover {
 		transition: $transition;
 		.btn-content {
-			display: initial;
+			display: block;
 			position: relative;
 			right: 35px;
 			font-size: 1.3em;
@@ -157,40 +157,42 @@
 }
 
 .filter-arts {
-	@include arts-icon($grey);
+	@include arts-icon-grey();
 }
 
 .filter-arts.active {
 	color: $blue;
-	@include arts-icon($blue);
+	@include arts-icon();
 }
 
 .filter-civilrights {
-	@include civilrights-icon($grey);
+	@include civilrights-icon-grey();
+	background-size: auto 25px;
 }
 
 .filter-civilrights.active {
 	color: $brown;
-	@include civilrights-icon($brown);
+	@include civilrights-icon();
+	background-size: auto 25px;
 }
 
 
 .filter-development {
-	@include development-icon($grey);
+	@include development-icon-grey();
 }
 
 .filter-development.active {
 	color: $orange;
-	@include development-icon($orange);
+	@include development-icon();
 }
 
 .filter-infrastructure {
-	@include infrastructure-icon($grey);
+	@include infrastructure-icon-grey();
 }
 
 .filter-infrastructure.active {
 	color: $pink;
-	@include infrastructure-icon($pink);
+	@include infrastructure-icon();
 }
 
 
