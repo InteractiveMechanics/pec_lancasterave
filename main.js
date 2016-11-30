@@ -179,7 +179,10 @@ var showPopup = function(featureData) {
 					emptyIf('#attr', '#image-from');
 					emptyIf('#sourceTitle', '#info-from');
 					emptyIf('#resourceTitle', '#more-details');
-					
+					emptyIf('#caption', '#caption-period');
+					emptyIf('#attr', '#attr-period');
+					emptyIf('#sourceTitle', '#source-period');
+					emptyIf('#resourceTitle', '#resource-period');
 
 
            		} 
@@ -932,7 +935,7 @@ $('#next-stop').click(function() {
 		showFullMap();
 	} else {
 		$('#next-stop').html('Next Stop');
-		$('#prev-stop').html('Last Stop');
+		$('#prev-stop').html('Previous Stop');
 		for (i=0; i < jsonData.features.length; i++){
 			if (jsonData.features[i].properties.ID == tourId) {
 				resetPopup();
