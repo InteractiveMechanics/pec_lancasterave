@@ -527,7 +527,7 @@ var categoryFilterTasks = function(LayerGroup, button) {
 
 $('.logo-btn').click(function() {
     showWelcome();
-    alterHistory('/');
+    alterHistory('/lancasterave/');
     $('#welcome').addClass('visible');
 });
 
@@ -747,7 +747,7 @@ $('#explore-btn').click(function() {
     sendGAEvent('Explore the Map');
 
    showFullMap();
-   alterHistory('/map');
+   alterHistory('/lancasterave/map');
 });
 
 
@@ -889,7 +889,7 @@ var restorePopupStyles = function() {
 $('#tour-btn').click(function() {
     sendGAEvent('New Freedom Tour');
 
-    alterHistory('/map');
+    alterHistory('/lancasterave/map');
 	hideWelcome();
 	resetPopup();
 	if(map.hasLayer(tourGroup)) {
@@ -994,7 +994,7 @@ $(window).on("popstate", function(e) {
     if (e.originalEvent.state !== null) {
         hideWelcome();
     } else {
-        alterHistory('/');
+        alterHistory('/lancasterave/');
         showWelcome();
     }
 });
