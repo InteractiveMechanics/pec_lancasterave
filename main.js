@@ -944,8 +944,8 @@ $('#next-stop').click(function() {
 				//console.log(tourStopId);
 				//console.log(tourStopsArray.length);	
 
-                var lat = jsonData.features[tourId].geometry.coordinates[1];
-                var lon = jsonData.features[tourId].geometry.coordinates[0];
+                var lat = jsonData.features[i].geometry.coordinates[1];
+                var lon = jsonData.features[i].geometry.coordinates[0];
         
                 map.setView([lat, lon], 16);
 			}
@@ -975,8 +975,8 @@ $('#prev-stop').click(function() {
 				restorePopupStyles()
 				showPopup(jsonData.features[i]);	
 
-                var lat = jsonData.features[tourId].geometry.coordinates[1];
-                var lon = jsonData.features[tourId].geometry.coordinates[0];
+                var lat = jsonData.features[i].geometry.coordinates[1];
+                var lon = jsonData.features[i].geometry.coordinates[0];
         
                 map.setView([lat, lon], 16);
 			}
